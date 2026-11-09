@@ -1,0 +1,3 @@
+# AI Assistant — Feature Specification
+
+The assistant answers from permissioned, current application data with provenance. Tool registry includes list_tasks, search_notes, get_calendar_events, list_library, search_intelligence, get_briefing. Proposed write tools create_task, update_task, schedule_event, send_email must require approval before execution where appropriate. Show what information is being used; do not invent missing records. Store conversations and tool audits with retention controls. External content is untrusted; no prompt-injection instructions from emails/webpages may override system policies. Financial and health information require explicit data-access boundaries.

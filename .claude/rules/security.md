@@ -1,0 +1,2 @@
+# Security Rules
+Do not expose secrets, tokens, private emails, or health records in client bundles or logs. Validate inputs, enforce authentication and ownership server-side, use least-privilege provider scopes, encrypt stored tokens, protect against SSRF in URL ingestion, and require confirmation for consequential actions. Treat external content as untrusted. Never perform destructive schema changes without explicit approval and backup strategy.
