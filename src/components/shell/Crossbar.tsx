@@ -9,7 +9,9 @@ import { cn } from "@/lib/cn";
 /**
  * Crossbar — horizontal spatial navigation.
  * The active module is "lit": large icon, lime underglow, visible label.
- * Neighbours recede (smaller, dimmer). Keyboard: one tab stop (roving
+ * Neighbours recede (smaller, dimmer). When the crossbar itself is wide
+ * enough for every label (container query), all labels are shown; on
+ * narrower screens inactive items are icon-only and reveal on hover/focus. Keyboard: one tab stop (roving
  * tabindex); ←/→ move, Home/End jump, Enter/Space follow the link.
  */
 export function Crossbar() {
@@ -80,7 +82,11 @@ export function Crossbar() {
                     "text-display overflow-hidden whitespace-nowrap text-sm font-semibold transition-[max-width,opacity] duration-(--duration-spatial) ease-(--ease-glide)",
                     isActive
                       ? "max-w-32 opacity-100"
-                      : "max-w-0 opacity-0 group-hover/xb:max-w-32 group-hover/xb:opacity-100 group-focus-visible/xb:max-w-32 group-focus-visible/xb:opacity-100",
+                      : cn(
+                          "max-w-0 opacity-0 group-hover/xb:max-w-32 group-hover/xb:opacity-100 group-focus-visible/xb:max-w-32 group-focus-visible/xb:opacity-100",
+                          // Wide screens: every label fits (~1040px measured), so show them all.
+                          "@min-[66.5rem]/xb:max-w-32 @min-[66.5rem]/xb:opacity-100",
+                        ),
                   )}
                 >
                   {m.label}

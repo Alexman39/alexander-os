@@ -2,8 +2,8 @@
 
 ## Stage 0 — Product and design approval
 - [ ] Review all documentation and resolve architecture questions.
-- [ ] Build a high-fidelity clickable UI prototype with labeled demo data.
-- [ ] Review desktop and mobile; confirm design system and interaction model.
+- [x] Build a high-fidelity clickable UI prototype with labeled demo data. (see DESIGN_DECISIONS.md)
+- [x] Review desktop and mobile; confirm design system and interaction model. (approved 2026-11-09)
 
 ## Stage 1 — Foundation
 - [ ] Scaffold app, formatting, type checking, tests, and CI.

@@ -76,7 +76,7 @@ export function Shell({ children }: { children: ReactNode }) {
       <header className="sticky top-0 z-30">
         <div className="flex items-center gap-4 bg-abyss/70 px-4 pb-3 pt-3 shadow-[0_1px_0_rgb(255_255_255/0.05),0_12px_30px_-18px_rgb(0_0_0/0.9)] backdrop-blur-xl backdrop-saturate-150 sm:px-6 lg:px-10 lg:pt-4">
           <Wordmark />
-          <div className="hidden min-w-0 flex-1 justify-center lg:flex">
+          <div className="@container/xb hidden min-w-0 flex-1 justify-center lg:flex">
             <Crossbar />
           </div>
           <div className="ml-auto flex items-center gap-2 sm:gap-3 lg:ml-0">

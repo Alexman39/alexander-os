@@ -2,7 +2,7 @@
 
 Stage 0 visual prototype. This records **what was decided, why, and what is still open for approval**. It complements `DESIGN_SYSTEM.md` (the brief) — where they disagree, the brief wins until amended.
 
-Status: built and verified (lint, typecheck, production build, 29 automated checks — see *Verification*). **Awaiting design approval** of navigation, colour, typography, tile density, motion and hierarchy.
+Status: built, verified, and **design approved on 2026-11-09** (see §10 for the decisions taken). Remaining Stage 0 work is the architecture questions in `ARCHITECTURE.md`.
 
 ---
 
@@ -20,11 +20,11 @@ No console logos, sounds, icons, fonts, colours-as-trade-dress or layouts are co
 
 ## 2. Navigation
 
-- **Crossbar (desktop ≥1024px).** All nine modules in PRODUCT.md order. The active module is lit: larger icon, accent fill, lime under-glow, visible label. Others are icon-only and *recede with distance* from the active one; labels expand on hover **and** keyboard focus. Labels are always present for assistive tech.
+- **Crossbar (desktop ≥1024px).** All nine modules in PRODUCT.md order. The active module is lit: larger icon, accent fill, lime under-glow, visible label. Inactive items *recede with distance* from the active one. Labels are always present for assistive tech.
+  - **Wide screens show every label.** A container query on the crossbar itself (`@min-[66.5rem]/xb`) shows all labels once the bar has room — measured at ~1040px of labels, i.e. roughly ≥1640px viewports. Below that, inactive items are icon-only and expand on hover **and** keyboard focus. Using the bar's own width (not a viewport breakpoint) means it adapts if the header's other contents change.
   - Keyboard: a single tab stop (roving tabindex); `←/→`, `Home/End` move; `Enter/Space` go. `[` / `]` jump to previous/next module from anywhere.
-  - *Tradeoff:* icon-only inactive items cost discoverability. Mitigated by expand-on-focus, the command palette, and the Home shortcuts tile. If review finds it too cryptic, show labels at ≥1440px.
 - **Directional transitions.** Moving right along the crossbar slides content in from the right (and vice versa), reinforcing the spatial model. 320ms, ease-out.
-- **Mobile (<1024px).** Bottom dock with the four most-used modules (Home, Library, Intelligence, Assistant) + **More** sheet listing all nine as a tile grid. Desktop is not shrunk — each view re-flows to stacked surfaces with horizontally scrolling rails where a row would otherwise wrap awkwardly (blades, interests, conversations, shelves).
+- **Mobile (<1024px).** Bottom dock with **Home, Life, Work, Assistant** (chosen in review) + **More** sheet listing all nine as a tile grid. Life and Work are still reserved placeholders until Stage 1; Library and Intelligence are one tap away via More. Desktop is not shrunk — each view re-flows to stacked surfaces with horizontally scrolling rails where a row would otherwise wrap awkwardly (blades, interests, conversations, shelves).
 - **Command palette** (`Ctrl/⌘ K`) and **Quick capture** (`C`, or the lime `+`) are global. Capture is three keystrokes from anywhere, targeting the <15s capture criterion.
 
 ## 3. Visual language
@@ -107,17 +107,19 @@ tests/unit, tests/e2e    Playwright (unit + desktop + Pixel 7)
 ## 9. Verification (what actually ran)
 
 - `npm run lint`, `npm run typecheck`, `npm run build` — clean.
-- `npx playwright test` — 29 passed (7 unit tests for relevance scoring; 19 desktop browser tests; 3 mobile browser tests), stable across 3 consecutive runs. Covers crossbar mouse+keyboard, `[`/`]`, palette, capture, Escape, tile state previews, task toggle, Home→Assistant handoff, library detail/ownership/status/rating, 2-D shelf keyboard nav, filters, intelligence evidence/provenance/feedback/mute, assistant approve/decline/external flag/citations/demo honesty, reduced-motion behaviour, motion & ambient preferences, mobile dock + More sheet, mobile layout-viewport width, assistant no-scroll-on-load.
+- `npx playwright test` — 30 passed (7 unit tests for relevance scoring; 20 desktop browser tests; 3 mobile browser tests), stable across 3 consecutive runs. Covers crossbar mouse+keyboard and wide/narrow label behaviour, `[`/`]`, palette, capture, Escape, tile state previews, task toggle, Home→Assistant handoff, library detail/ownership/status/rating, 2-D shelf keyboard nav, filters, intelligence evidence/provenance/feedback/mute, assistant approve/decline/external flag/citations/demo honesty, reduced-motion behaviour, motion & ambient preferences, mobile dock + More sheet, mobile layout-viewport width, assistant no-scroll-on-load.
 - Visual inspection of screenshots at 1440×900 and 390/412px wide for Home, Library, Intelligence, Assistant, Settings and a placeholder module, plus detail blade, expanded evidence and palette states.
 
 Not verified: screen-reader walkthrough (only semantics were checked), Safari/Firefox rendering, real touch devices, contrast measured with a tool rather than by token design.
 
-## 10. Open questions for approval
+## 10. Review decisions (2026-11-09)
 
-1. **Crossbar labels** — icon-only inactive items, or always-visible labels on wide screens?
-2. **Tile density on Home** — nine surfaces above the fold at 1440px. Too dense, or right for a command center?
-3. **Accent intensity** — lime is loud by design (selection only). Keep, or soften to a paler chartreuse?
-4. **Display face** — Bricolage Grotesque vs a more neutral grotesk.
-5. **Ambient motion default** — on (current) or off by default?
-6. **Mobile dock membership** — Home, Library, Intelligence, Assistant; should Work replace Library once Stage 1 lands?
-7. **Generated covers** — acceptable long-term fallback when a provider has no art?
+| Question | Decision |
+|---|---|
+| Crossbar labels | **Show all labels on wide screens**, icons only (expand on hover/focus) on narrower ones — implemented via container query. |
+| Home tile density | **Keep.** Density is right for a command center; familiarity will make it faster. |
+| Lime accent | **Keep** as is. |
+| Display face | **Keep** Bricolage Grotesque. |
+| Ambient motion default | **On** — it makes the system feel alive. Still pausable in Settings and off under reduced motion. |
+| Mobile dock | **Home, Life, Work, Assistant** (+ More). Revisit after Life/Work have real content. |
+| Generated covers | **Acceptable fallback** when no cover art is available from a provider. Real art preferred when the provider supplies it with attribution. |

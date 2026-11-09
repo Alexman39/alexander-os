@@ -42,17 +42,18 @@ export interface NavModule {
 export const NAV: NavModule[] = [
   {
     id: "home",
+    dock: true,
     label: "Home",
     href: "/",
     icon: Home,
     accent: "var(--color-lime)",
     aurora: ["#173a8c", "#3c2a9e", "#0d6a6e"],
     designed: true,
-    dock: true,
     blurb: "Briefing, today, focus and progress",
   },
   {
     id: "life",
+    dock: true,
     label: "Life",
     href: "/life",
     icon: Sun,
@@ -63,6 +64,7 @@ export const NAV: NavModule[] = [
   },
   {
     id: "work",
+    dock: true,
     label: "Work",
     href: "/work",
     icon: Briefcase,
@@ -99,7 +101,6 @@ export const NAV: NavModule[] = [
     accent: "var(--color-personal)",
     aurora: ["#6b3a0c", "#40205e", "#0f3a5a"],
     designed: true,
-    dock: true,
     blurb: "Books, games and films",
   },
   {
@@ -110,18 +111,17 @@ export const NAV: NavModule[] = [
     accent: "var(--color-intel)",
     aurora: ["#3a1e8a", "#5b2bb5", "#13306e"],
     designed: true,
-    dock: true,
     blurb: "Monitored topics and briefings",
   },
   {
     id: "assistant",
+    dock: true,
     label: "Assistant",
     href: "/assistant",
     icon: Sparkles,
     accent: "var(--color-system)",
     aurora: ["#0c3f80", "#2b2690", "#0b5a6e"],
     designed: true,
-    dock: true,
     blurb: "Grounded answers and approved actions",
   },
   {

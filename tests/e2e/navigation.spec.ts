@@ -38,6 +38,17 @@ test.describe("shell & navigation", () => {
     await expect(page.getByRole("heading", { level: 1, name: "Library" })).toBeVisible();
   });
 
+  test("crossbar shows every label on wide screens, icons only on narrower ones", async ({ page }) => {
+    const label = (name: string) =>
+      page.getByRole("navigation", { name: "Modules" }).first().getByRole("link", { name, exact: true }).locator("span").nth(1);
+    await page.setViewportSize({ width: 1920, height: 1000 });
+    await gotoHydrated(page, "/");
+    await expect(label("Intelligence")).toHaveCSS("opacity", "1");
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await expect(label("Intelligence")).toHaveCSS("opacity", "0");
+    await expect(label("Home")).toHaveCSS("opacity", "1"); // active label always visible
+  });
+
   test("[ and ] move between modules", async ({ page }) => {
     await gotoHydrated(page, "/library");
     await page.locator("body").press("]");

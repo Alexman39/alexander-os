@@ -13,8 +13,9 @@ test.describe("mobile layout", () => {
     }
     await page.goto("/");
     const dock = page.getByRole("navigation", { name: "Modules" }).last();
-    await dock.getByRole("link", { name: "Library" }).click();
-    await expect(page).toHaveURL("/library");
+    await expect(dock.getByRole("link")).toHaveText(["Home", "Life", "Work", "Assistant"]);
+    await dock.getByRole("link", { name: "Work" }).click();
+    await expect(page).toHaveURL("/work");
     await dock.getByRole("button", { name: "More" }).click();
     await page.getByRole("dialog", { name: "All modules" }).getByRole("link", { name: "Settings" }).click();
     await expect(page).toHaveURL("/settings");
