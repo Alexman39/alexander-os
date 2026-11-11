@@ -1,7 +1,7 @@
 # Alexander OS — Delivery Roadmap
 
 ## Stage 0 — Product and design approval
-- [ ] Review all documentation and resolve architecture questions.
+- [x] Review all documentation and resolve architecture questions. (decided 2026-11-11, see ARCHITECTURE.md)
 - [x] Build a high-fidelity clickable UI prototype with labeled demo data. (see DESIGN_DECISIONS.md)
 - [x] Review desktop and mobile; confirm design system and interaction model. (approved 2026-11-09)
 

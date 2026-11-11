@@ -2,7 +2,7 @@
 
 Stage 0 visual prototype. This records **what was decided, why, and what is still open for approval**. It complements `DESIGN_SYSTEM.md` (the brief) — where they disagree, the brief wins until amended.
 
-Status: built, verified, and **design approved on 2026-11-09** (see §10 for the decisions taken). Remaining Stage 0 work is the architecture questions in `ARCHITECTURE.md`.
+Status: built, verified, and **design approved on 2026-11-09** (see §10 for the decisions taken). Architecture decisions were made on 2026-11-11 (see `ARCHITECTURE.md`).
 
 ---
 
