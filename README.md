@@ -4,6 +4,7 @@ A private personal operating system. **Current state: Stage 0 visual prototype**
 
 - Product & spec: `docs/PRODUCT.md`, `docs/DESIGN_SYSTEM.md`, `docs/ARCHITECTURE.md`, `docs/ROADMAP.md`
 - Prototype design rationale & open questions: **`docs/DESIGN_DECISIONS.md`**
+- Accounts & secrets setup (Vercel, Neon, GitHub OAuth, Gemini): **`docs/SETUP.md`**, with variables listed in `.env.example`
 
 ## Run
 
