@@ -1,6 +1,8 @@
 // Alexander OS — database schema (Stage 1).
 // Rules (docs/DATABASE.md): UUID ids, created/updated timestamps, explicit
 // user ownership on every personal record, migrations reviewed before apply.
+// UUID defaults use `gen_random_uuid()` (not `pg_catalog.…`) because that is
+// how Postgres stores it; the other spelling causes permanent migration drift.
 
 generator client {
   provider = "prisma-client"
@@ -17,7 +19,7 @@ datasource db {
 // ---------------------------------------------------------------------------
 
 model User {
-  id            String          @id @default(dbgenerated("pg_catalog.gen_random_uuid()")) @db.Uuid
+  id            String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name          String
   email         String
   emailVerified Boolean         @default(false)
@@ -37,7 +39,7 @@ model User {
 }
 
 model Session {
-  id        String   @id @default(dbgenerated("pg_catalog.gen_random_uuid()")) @db.Uuid
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   expiresAt DateTime
   token     String
   createdAt DateTime @default(now())
@@ -53,7 +55,7 @@ model Session {
 }
 
 model Account {
-  id                    String    @id @default(dbgenerated("pg_catalog.gen_random_uuid()")) @db.Uuid
+  id                    String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   accountId             String
   providerId            String
   userId                String    @db.Uuid
@@ -74,7 +76,7 @@ model Account {
 }
 
 model Verification {
-  id         String   @id @default(dbgenerated("pg_catalog.gen_random_uuid()")) @db.Uuid
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   identifier String
   value      String
   expiresAt  DateTime
@@ -90,7 +92,7 @@ model Verification {
 // ---------------------------------------------------------------------------
 
 model UserPreference {
-  id        String   @id @default(dbgenerated("pg_catalog.gen_random_uuid()")) @db.Uuid
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   userId    String   @unique @db.Uuid
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   /// IANA timezone used for "today", schedules and briefings.
@@ -142,7 +144,7 @@ enum NoteKind {
 }
 
 model Project {
-  id          String        @id @default(dbgenerated("pg_catalog.gen_random_uuid()")) @db.Uuid
+  id          String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   userId      String        @db.Uuid
   user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   name        String
@@ -160,7 +162,7 @@ model Project {
 }
 
 model Task {
-  id          String     @id @default(dbgenerated("pg_catalog.gen_random_uuid()")) @db.Uuid
+  id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   userId      String     @db.Uuid
   user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   projectId   String?    @db.Uuid
@@ -186,7 +188,7 @@ model Task {
 }
 
 model Note {
-  id        String    @id @default(dbgenerated("pg_catalog.gen_random_uuid()")) @db.Uuid
+  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   userId    String    @db.Uuid
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   projectId String?   @db.Uuid
@@ -204,7 +206,7 @@ model Note {
 }
 
 model Tag {
-  id        String    @id @default(dbgenerated("pg_catalog.gen_random_uuid()")) @db.Uuid
+  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   userId    String    @db.Uuid
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   /// Lower-case, trimmed; unique per user.

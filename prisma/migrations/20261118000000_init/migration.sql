@@ -18,7 +18,7 @@ CREATE TYPE "NoteKind" AS ENUM ('NOTE', 'IDEA');
 
 -- CreateTable
 CREATE TABLE "user" (
-    "id" UUID NOT NULL DEFAULT pg_catalog.gen_random_uuid(),
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "emailVerified" BOOLEAN NOT NULL DEFAULT false,
@@ -31,7 +31,7 @@ CREATE TABLE "user" (
 
 -- CreateTable
 CREATE TABLE "session" (
-    "id" UUID NOT NULL DEFAULT pg_catalog.gen_random_uuid(),
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "expiresAt" TIMESTAMP(3) NOT NULL,
     "token" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -45,7 +45,7 @@ CREATE TABLE "session" (
 
 -- CreateTable
 CREATE TABLE "account" (
-    "id" UUID NOT NULL DEFAULT pg_catalog.gen_random_uuid(),
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "accountId" TEXT NOT NULL,
     "providerId" TEXT NOT NULL,
     "userId" UUID NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE "account" (
 
 -- CreateTable
 CREATE TABLE "verification" (
-    "id" UUID NOT NULL DEFAULT pg_catalog.gen_random_uuid(),
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "identifier" TEXT NOT NULL,
     "value" TEXT NOT NULL,
     "expiresAt" TIMESTAMP(3) NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE "verification" (
 
 -- CreateTable
 CREATE TABLE "user_preference" (
-    "id" UUID NOT NULL DEFAULT pg_catalog.gen_random_uuid(),
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "userId" UUID NOT NULL,
     "timezone" TEXT NOT NULL DEFAULT 'Europe/Athens',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -87,7 +87,7 @@ CREATE TABLE "user_preference" (
 
 -- CreateTable
 CREATE TABLE "project" (
-    "id" UUID NOT NULL DEFAULT pg_catalog.gen_random_uuid(),
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "userId" UUID NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT,
@@ -102,7 +102,7 @@ CREATE TABLE "project" (
 
 -- CreateTable
 CREATE TABLE "task" (
-    "id" UUID NOT NULL DEFAULT pg_catalog.gen_random_uuid(),
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "userId" UUID NOT NULL,
     "projectId" UUID,
     "title" TEXT NOT NULL,
@@ -121,7 +121,7 @@ CREATE TABLE "task" (
 
 -- CreateTable
 CREATE TABLE "note" (
-    "id" UUID NOT NULL DEFAULT pg_catalog.gen_random_uuid(),
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "userId" UUID NOT NULL,
     "projectId" UUID,
     "kind" "NoteKind" NOT NULL DEFAULT 'NOTE',
@@ -136,7 +136,7 @@ CREATE TABLE "note" (
 
 -- CreateTable
 CREATE TABLE "tag" (
-    "id" UUID NOT NULL DEFAULT pg_catalog.gen_random_uuid(),
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "userId" UUID NOT NULL,
     "name" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
