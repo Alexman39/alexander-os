@@ -14,11 +14,31 @@ permissions:
 
 jobs:
   verify:
-    name: Format, lint, typecheck, build, test
+    name: Format, lint, typecheck, migrations, build, test
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_USER: aos
+          POSTGRES_PASSWORD: aos
+          POSTGRES_DB: aos
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U aos"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     env:
       NEXT_TELEMETRY_DISABLED: "1"
+      # Throwaway CI database and dummy secrets only — never Neon or real keys.
+      DATABASE_URL: postgresql://aos:aos@localhost:5432/aos
+      BETTER_AUTH_SECRET: ci-only-secret-not-used-anywhere-else-0123456789
+      BETTER_AUTH_URL: http://localhost:3100
+      GITHUB_CLIENT_ID: ci-dummy-client-id
+      GITHUB_CLIENT_SECRET: ci-dummy-client-secret
+      OWNER_GITHUB_ID: "1000000001"
     steps:
       - uses: actions/checkout@v4
 
@@ -38,13 +58,19 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
+      - name: Apply all migrations to an empty database
+        run: npx prisma migrate deploy
+
+      - name: Fail if schema.prisma has changes without a migration
+        run: npx prisma migrate diff --from-config-datasource --to-schema prisma/schema.prisma --exit-code
+
       - name: Build
         run: npm run build
 
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
 
-      - name: Test (unit + desktop + mobile)
+      - name: Test (unit + auth + desktop + mobile)
         run: npm test
 
       - name: Upload test report on failure
@@ -54,39 +80,3 @@ jobs:
           name: playwright-results
           path: test-results/
           retention-days: 7
-
-  database:
-    name: Migrations apply and match the schema
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    services:
-      postgres:
-        image: postgres:18
-        env:
-          POSTGRES_USER: aos
-          POSTGRES_PASSWORD: aos
-          POSTGRES_DB: aos
-        ports: ["5432:5432"]
-        options: >-
-          --health-cmd "pg_isready -U aos"
-          --health-interval 5s
-          --health-timeout 5s
-          --health-retries 10
-    env:
-      # Throwaway CI database only — never Neon.
-      DATABASE_URL: postgresql://aos:aos@localhost:5432/aos
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-          cache: npm
-
-      - run: npm ci
-
-      - name: Apply all migrations to an empty database
-        run: npx prisma migrate deploy
-
-      - name: Fail if schema.prisma has changes without a migration
-        run: npx prisma migrate diff --from-config-datasource --to-schema prisma/schema.prisma --exit-code

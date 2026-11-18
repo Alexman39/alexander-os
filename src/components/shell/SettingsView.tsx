@@ -23,11 +23,18 @@ const SHORTCUTS: Array<[ReactNode, string]> = [
   [<Kbd key="e">Esc</Kbd>, "Close any panel"],
 ];
 
-export function SettingsView() {
+/** `account` is a server-rendered slot (session-dependent, streamed in Suspense). */
+export function SettingsView({ account }: { account?: ReactNode }) {
   const { motion, setMotion, ambient, setAmbient, reducedMotion } = useOs();
   return (
     <div className="mx-auto flex max-w-[900px] flex-col gap-6 pt-2 lg:pt-4">
       <PageHeading index="09 · Settings" title="Settings" />
+
+      {account && (
+        <Panel title="Account" eyebrow="Signed in">
+          {account}
+        </Panel>
+      )}
 
       <Panel title="Motion" eyebrow="Accessibility">
         <div role="radiogroup" aria-label="Motion preference" className="grid gap-2 sm:grid-cols-3">

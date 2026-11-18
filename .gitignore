@@ -50,3 +50,6 @@ next-env.d.ts
 
 # prisma generated client
 /src/generated/
+
+# playwright auth state (signed test cookies)
+/tests/.auth/
