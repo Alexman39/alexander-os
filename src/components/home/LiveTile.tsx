@@ -31,7 +31,12 @@ export function LiveFaces({ faces, interval = 6500, label }: { faces: ReactNode[
       onFocus={() => setHovering(true)}
       onBlur={() => setHovering(false)}
     >
-      <div className="relative flex-1 [perspective:800px]" aria-live={auto ? "off" : "polite"} aria-roledescription="live tile" aria-label={label}>
+      <div
+        className="relative flex-1 [perspective:800px]"
+        aria-live={auto ? "off" : "polite"}
+        aria-roledescription="live tile"
+        aria-label={label}
+      >
         <div key={i} className="live-face-enter h-full">
           {faces[i]}
         </div>

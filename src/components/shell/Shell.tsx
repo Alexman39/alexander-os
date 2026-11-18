@@ -66,7 +66,7 @@ export function Shell({ children }: { children: ReactNode }) {
     <div style={vars} className="relative isolate flex min-h-dvh flex-col overflow-x-clip">
       <a
         href="#main"
-        className="fixed left-3 top-3 z-50 -translate-y-20 rounded-md bg-lime px-3 py-2 text-sm font-semibold text-void focus:translate-y-0"
+        className="fixed top-3 left-3 z-50 -translate-y-20 rounded-md bg-lime px-3 py-2 text-sm font-semibold text-void focus:translate-y-0"
       >
         Skip to content
       </a>
@@ -74,7 +74,7 @@ export function Shell({ children }: { children: ReactNode }) {
 
       {/* Top chrome */}
       <header className="sticky top-0 z-30">
-        <div className="flex items-center gap-4 bg-abyss/70 px-4 pb-3 pt-3 shadow-[0_1px_0_rgb(255_255_255/0.05),0_12px_30px_-18px_rgb(0_0_0/0.9)] backdrop-blur-xl backdrop-saturate-150 sm:px-6 lg:px-10 lg:pt-4">
+        <div className="flex items-center gap-4 bg-abyss/70 px-4 pt-3 pb-3 shadow-[0_1px_0_rgb(255_255_255/0.05),0_12px_30px_-18px_rgb(0_0_0/0.9)] backdrop-blur-xl backdrop-saturate-150 sm:px-6 lg:px-10 lg:pt-4">
           <Wordmark />
           <div className="@container/xb hidden min-w-0 flex-1 justify-center lg:flex">
             <Crossbar />
@@ -108,7 +108,7 @@ export function Shell({ children }: { children: ReactNode }) {
         id="main"
         tabIndex={-1}
         key={pathname}
-        className={`relative flex-1 px-4 pb-28 pt-2 outline-none sm:px-6 lg:px-10 lg:pb-12 ${
+        className={`relative flex-1 px-4 pt-2 pb-28 outline-none sm:px-6 lg:px-10 lg:pb-12 ${
           direction === "right" ? "animate-enter-right" : "animate-enter-left"
         }`}
       >
@@ -126,7 +126,7 @@ export function Shell({ children }: { children: ReactNode }) {
         className="pointer-events-none fixed inset-x-0 bottom-24 z-50 flex flex-col items-center gap-2 px-4 lg:bottom-6"
       >
         {toasts.map((t) => (
-          <div key={t.id} className="surface-3 animate-rise rounded-md px-4 py-2.5 text-sm text-ink">
+          <div key={t.id} className="animate-rise rounded-md px-4 py-2.5 text-sm text-ink surface-3">
             <span className="mr-2 inline-block size-1.5 rounded-full bg-lime align-middle shadow-[0_0_8px_var(--color-lime)]" />
             {t.text}
           </div>

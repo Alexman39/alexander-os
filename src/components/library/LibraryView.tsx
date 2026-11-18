@@ -62,10 +62,34 @@ export function LibraryView() {
 
   const count = (t: TypeFilter) => entries.filter((e) => t === "ALL" || e.type === t).length;
   const blades: BladeItem<TypeFilter>[] = [
-    { id: "ALL", label: "Everything", count: count("ALL"), icon: <Layers className="size-4" aria-hidden />, tone: "var(--color-lime)" },
-    { id: "BOOK", label: "Books", count: count("BOOK"), icon: <BookOpen className="size-4" aria-hidden />, tone: "var(--color-system)" },
-    { id: "GAME", label: "Games", count: count("GAME"), icon: <Gamepad2 className="size-4" aria-hidden />, tone: "var(--color-intel)" },
-    { id: "MOVIE", label: "Films", count: count("MOVIE"), icon: <Clapperboard className="size-4" aria-hidden />, tone: "var(--color-personal)" },
+    {
+      id: "ALL",
+      label: "Everything",
+      count: count("ALL"),
+      icon: <Layers className="size-4" aria-hidden />,
+      tone: "var(--color-lime)",
+    },
+    {
+      id: "BOOK",
+      label: "Books",
+      count: count("BOOK"),
+      icon: <BookOpen className="size-4" aria-hidden />,
+      tone: "var(--color-system)",
+    },
+    {
+      id: "GAME",
+      label: "Games",
+      count: count("GAME"),
+      icon: <Gamepad2 className="size-4" aria-hidden />,
+      tone: "var(--color-intel)",
+    },
+    {
+      id: "MOVIE",
+      label: "Films",
+      count: count("MOVIE"),
+      icon: <Clapperboard className="size-4" aria-hidden />,
+      tone: "var(--color-personal)",
+    },
   ];
 
   const update = (id: string, patch: Partial<LibraryEntry>) =>
@@ -117,7 +141,7 @@ export function LibraryView() {
             onChange={setType}
             label="Media type"
             controls="library-shelves"
-            className="scrollbar-none -mx-4 overflow-x-auto px-4 lg:mx-0 lg:overflow-visible lg:px-0"
+            className="-mx-4 scrollbar-none overflow-x-auto px-4 lg:mx-0 lg:overflow-visible lg:px-0"
           />
           <div className="hidden lg:block">
             <Eyebrow className="mb-2">Ownership</Eyebrow>
@@ -131,7 +155,7 @@ export function LibraryView() {
           {/* Filters */}
           <div className="flex flex-wrap items-center gap-2">
             <div className="relative min-w-0 flex-1 sm:max-w-xs">
-              <Search aria-hidden className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-ink-faint" />
+              <Search aria-hidden className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-ink-faint" />
               <label htmlFor="lib-search" className="sr-only">
                 Search library
               </label>
@@ -140,7 +164,7 @@ export function LibraryView() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search title, creator, tag"
-                className="h-10 w-full rounded-md bg-white/[0.04] pl-9 pr-3 text-sm text-ink shadow-[inset_0_0_0_1px_var(--edge)] placeholder:text-ink-faint focus:outline-none focus-visible:shadow-[inset_0_0_0_2px_var(--color-lime)]"
+                className="h-10 w-full rounded-md bg-white/[0.04] pr-3 pl-9 text-sm text-ink shadow-[inset_0_0_0_1px_var(--edge)] placeholder:text-ink-faint focus:outline-none focus-visible:shadow-[inset_0_0_0_2px_var(--color-lime)]"
               />
             </div>
             <div className="lg:hidden">
@@ -163,9 +187,11 @@ export function LibraryView() {
           {/* Shelves */}
           <div id="library-shelves" role="tabpanel" aria-labelledby={`blade-${type}`} className="flex flex-col gap-7">
             {filtered.length === 0 && (
-              <div className="surface-1 flex flex-col items-start gap-2 rounded-(--radius-tile) p-6">
+              <div className="flex flex-col items-start gap-2 rounded-(--radius-tile) p-6 surface-1">
                 <p className="text-display text-lg font-semibold">No matches on these shelves.</p>
-                <p className="text-sm text-ink-muted">Try another type or clear the search. Manual entry will be available when no catalog match exists.</p>
+                <p className="text-sm text-ink-muted">
+                  Try another type or clear the search. Manual entry will be available when no catalog match exists.
+                </p>
               </div>
             )}
             {SHELVES.map((s, si) => {
@@ -181,7 +207,7 @@ export function LibraryView() {
                     <span className="hidden text-xs text-ink-faint sm:inline">— {s.hint}</span>
                   </div>
                   <div className="relative">
-                    <ul className="scrollbar-none -mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-5 pt-2 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
+                    <ul className="-mx-4 scrollbar-none flex snap-x gap-4 overflow-x-auto px-4 pt-2 pb-5 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
                       {items.map((e, i) => (
                         <li key={e.id} className="w-[108px] shrink-0 snap-start sm:w-[124px]">
                           <button
@@ -207,17 +233,22 @@ export function LibraryView() {
                               size="sm"
                               className={cn(
                                 "shadow-[0_18px_30px_-14px_rgb(0_0_0/0.9)] transition-shadow duration-(--duration-spatial)",
-                                e.id === focused.id && "shadow-[0_0_0_2px_var(--color-lime),0_0_28px_-4px_var(--color-lime),0_24px_40px_-16px_rgb(0_0_0/0.9)]",
+                                e.id === focused.id &&
+                                  "shadow-[0_0_0_2px_var(--color-lime),0_0_28px_-4px_var(--color-lime),0_24px_40px_-16px_rgb(0_0_0/0.9)]",
                               )}
                             />
-                            <span className="mt-2 block truncate text-xs font-medium text-ink-muted group-hover/cover:text-ink">{e.title}</span>
+                            <span className="mt-2 block truncate text-xs font-medium text-ink-muted group-hover/cover:text-ink">
+                              {e.title}
+                            </span>
                             <span className="flex items-center gap-1.5 text-[11px] text-ink-faint">
                               {e.ownership === "wishlist" ? (
                                 <span className="text-personal">Wishlist</span>
                               ) : (
                                 <span>Owned</span>
                               )}
-                              {e.status === "in_progress" && <span className="ml-auto tabular-nums text-lime">{e.progress}%</span>}
+                              {e.status === "in_progress" && (
+                                <span className="ml-auto text-lime tabular-nums">{e.progress}%</span>
+                              )}
                               {e.rating !== null && (
                                 <span className="ml-auto flex items-center gap-0.5 text-personal">
                                   <Star aria-hidden className="size-3 fill-current" />
@@ -230,7 +261,10 @@ export function LibraryView() {
                       ))}
                     </ul>
                     {/* shelf ledge */}
-                    <div aria-hidden className="absolute inset-x-0 bottom-12 -z-10 hidden h-px bg-gradient-to-r from-transparent via-white/15 to-transparent sm:block" />
+                    <div
+                      aria-hidden
+                      className="absolute inset-x-0 bottom-12 -z-10 hidden h-px bg-gradient-to-r from-transparent via-white/15 to-transparent sm:block"
+                    />
                   </div>
                 </section>
               );
@@ -281,7 +315,7 @@ function Stage({ entry, onOpen }: { entry: LibraryEntry; onOpen: () => void }) {
     <section
       aria-label="Selected item"
       aria-live="polite"
-      className="surface-2 chamfer relative overflow-hidden rounded-(--radius-panel) p-4 sm:p-6"
+      className="relative overflow-hidden rounded-(--radius-panel) p-4 surface-2 chamfer sm:p-6"
     >
       {/* colour wash from cover */}
       <div
@@ -289,25 +323,36 @@ function Stage({ entry, onOpen }: { entry: LibraryEntry; onOpen: () => void }) {
         className="pointer-events-none absolute inset-0 opacity-40 transition-[background] duration-700"
         style={{ background: `radial-gradient(80% 120% at 0% 0%, ${entry.palette[1]}, transparent 70%)` }}
       />
-      <div key={entry.id} className="animate-rise relative grid grid-cols-[96px_1fr] gap-4 sm:grid-cols-[150px_1fr] sm:gap-7 xl:grid-cols-[170px_1fr_260px]">
+      <div
+        key={entry.id}
+        className="relative grid animate-rise grid-cols-[96px_1fr] gap-4 sm:grid-cols-[150px_1fr] sm:gap-7 xl:grid-cols-[170px_1fr_260px]"
+      >
         <div className="[perspective:900px]">
           <Cover
             entry={entry}
             size="lg"
-            className="origin-left shadow-[0_30px_50px_-20px_rgb(0_0_0/0.95)] transition-transform duration-500 [transform:rotateY(8deg)]"
+            className="origin-left [transform:rotateY(8deg)] shadow-[0_30px_50px_-20px_rgb(0_0_0/0.95)] transition-transform duration-500"
           />
         </div>
         <div className="flex min-w-0 flex-col">
           <Eyebrow tone={entry.palette[2] === "#1b1b1b" ? undefined : "var(--color-personal)"}>
             {TYPE_LABEL[entry.type]} · {entry.year}
           </Eyebrow>
-          <h2 className="text-display mt-1 text-2xl font-semibold leading-[1.05] sm:text-4xl">{entry.title}</h2>
+          <h2 className="mt-1 text-display text-2xl leading-[1.05] font-semibold sm:text-4xl">{entry.title}</h2>
           <p className="mt-1 text-sm text-ink-muted">{entry.creator}</p>
           <div className="mt-3 flex flex-wrap gap-1.5">
             <Chip tone={entry.ownership === "owned" ? "var(--color-positive)" : "var(--color-personal)"}>
               {entry.ownership === "owned" ? "Owned" : "Wishlist"}
             </Chip>
-            <Chip tone={entry.status === "in_progress" ? "var(--color-lime)" : entry.status === "completed" ? "var(--color-system)" : undefined}>
+            <Chip
+              tone={
+                entry.status === "in_progress"
+                  ? "var(--color-lime)"
+                  : entry.status === "completed"
+                    ? "var(--color-system)"
+                    : undefined
+              }
+            >
               {STATUS_LABEL[entry.status]}
             </Chip>
             {entry.tags.map((t) => (
@@ -342,7 +387,10 @@ function Stage({ entry, onOpen }: { entry: LibraryEntry; onOpen: () => void }) {
                 <Star
                   key={i}
                   aria-hidden
-                  className={cn("size-4", entry.rating !== null && i < entry.rating ? "fill-personal text-personal" : "text-ink-ghost")}
+                  className={cn(
+                    "size-4",
+                    entry.rating !== null && i < entry.rating ? "fill-personal text-personal" : "text-ink-ghost",
+                  )}
                 />
               ))}
             </dd>
@@ -356,7 +404,7 @@ function Stage({ entry, onOpen }: { entry: LibraryEntry; onOpen: () => void }) {
           {entry.notes && (
             <div className="col-span-2 xl:col-span-1">
               <dt className="text-meta text-ink-faint">Note</dt>
-              <dd className="mt-0.5 line-clamp-2 italic text-ink-muted">“{entry.notes}”</dd>
+              <dd className="mt-0.5 line-clamp-2 text-ink-muted italic">“{entry.notes}”</dd>
             </div>
           )}
         </dl>

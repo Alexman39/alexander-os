@@ -78,8 +78,7 @@ export const DEMO_CONVERSATIONS: Conversation[] = [
           { tool: "list_tasks", args: "status=open, due≤tomorrow", result: "3 tasks" },
           { tool: "get_calendar_events", args: "date=tomorrow", result: "4 events (demo calendar)" },
         ],
-        text:
-          "Your calendar has a free block from 15:45 to 17:30 after thesis supervision [[E-4]]. The highest-priority open item is the literature review outline [[T-12]], which also unblocks the next action on your thesis project [[P-1]].\n\nI'd suggest using that block for the outline, and keeping the pull-request review [[T-18]] for the evening deep-work slot.",
+        text: "Your calendar has a free block from 15:45 to 17:30 after thesis supervision [[E-4]]. The highest-priority open item is the literature review outline [[T-12]], which also unblocks the next action on your thesis project [[P-1]].\n\nI'd suggest using that block for the outline, and keeping the pull-request review [[T-18]] for the evening deep-work slot.",
         citations: [
           { ref: "E-4", kind: "event", label: "Thesis supervision · 15:00" },
           { ref: "T-12", kind: "task", label: "Finish literature review outline" },
@@ -109,8 +108,7 @@ export const DEMO_CONVERSATIONS: Conversation[] = [
       {
         role: "assistant",
         tools: [{ tool: "list_library", args: "type=BOOK, status=in_progress", result: "2 entries" }],
-        text:
-          "Two books are in progress: Designing Data-Intensive Applications at 62% [[L-1]] and Meditations at 18% [[L-9]]. Your note on the first says to re-read the replication chapter before the exam.",
+        text: "Two books are in progress: Designing Data-Intensive Applications at 62% [[L-1]] and Meditations at 18% [[L-9]]. Your note on the first says to re-read the replication chapter before the exam.",
         citations: [
           { ref: "L-1", kind: "library", label: "Designing Data-Intensive Applications" },
           { ref: "L-9", kind: "library", label: "Meditations" },
@@ -127,8 +125,7 @@ export const DEMO_CONVERSATIONS: Conversation[] = [
       {
         role: "assistant",
         tools: [{ tool: "get_calendar_events", args: "query=supervision", result: "1 event" }],
-        text:
-          "I found your supervision meeting [[E-4]]. Here's a draft — sending email leaves Alexander OS, so it needs your explicit approval and nothing is sent until you confirm.",
+        text: "I found your supervision meeting [[E-4]]. Here's a draft — sending email leaves Alexander OS, so it needs your explicit approval and nothing is sent until you confirm.",
         citations: [{ ref: "E-4", kind: "event", label: "Thesis supervision · 15:00" }],
         proposal: {
           id: "PR-3",
@@ -154,8 +151,7 @@ export const SCRIPTED_REPLIES: Record<string, Extract<Turn, { role: "assistant" 
       { tool: "get_briefing", args: "type=daily", result: "Demo briefing (no job has run)" },
       { tool: "search_intelligence", args: "tier=high", result: "2 events" },
     ],
-    text:
-      "Two high-relevance items today. An open-weight model family added long-context variants, though benchmarks are unreplicated [[EV-101]]. A tool-permission spec for agents reached public draft and closely mirrors your assistant's approval model [[EV-102]].",
+    text: "Two high-relevance items today. An open-weight model family added long-context variants, though benchmarks are unreplicated [[EV-101]]. A tool-permission spec for agents reached public draft and closely mirrors your assistant's approval model [[EV-102]].",
     citations: [
       { ref: "EV-101", kind: "intel", label: "Long-context open-weight models · 4 sources" },
       { ref: "EV-102", kind: "intel", label: "Agent permission spec draft · 3 sources" },
@@ -164,8 +160,7 @@ export const SCRIPTED_REPLIES: Record<string, Extract<Turn, { role: "assistant" 
   "What's due this week?": {
     role: "assistant",
     tools: [{ tool: "list_tasks", args: "due≤sunday", result: "3 tasks" }],
-    text:
-      "Three items: the literature review outline today [[T-12]], the PR review today [[T-18]], and the physio booking, which is already done [[T-21]].",
+    text: "Three items: the literature review outline today [[T-12]], the PR review today [[T-18]], and the physio booking, which is already done [[T-21]].",
     citations: [
       { ref: "T-12", kind: "task", label: "Finish literature review outline" },
       { ref: "T-18", kind: "task", label: "Review PR for ingestion worker" },
@@ -178,6 +173,5 @@ export const SUGGESTED_PROMPTS = Object.keys(SCRIPTED_REPLIES);
 
 export const FALLBACK_REPLY: Extract<Turn, { role: "assistant" }> = {
   role: "assistant",
-  text:
-    "Demo mode: no language model is connected, so I can only replay scripted examples. Try one of the suggested prompts below to see grounded answers with citations.",
+  text: "Demo mode: no language model is connected, so I can only replay scripted examples. Try one of the suggested prompts below to see grounded answers with citations.",
 };

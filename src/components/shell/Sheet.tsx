@@ -63,13 +63,13 @@ export function Sheet({
         if (e.target === ref.current) onClose(); // backdrop click
       }}
       className={cn(
-        "surface-3 max-w-none overflow-hidden p-0 text-ink backdrop:bg-void/70 backdrop:backdrop-blur-sm",
+        "max-w-none overflow-hidden p-0 text-ink surface-3 backdrop:bg-void/70 backdrop:backdrop-blur-sm",
         placement,
         className,
       )}
     >
       {open && (
-        <div className="flex max-h-[inherit] h-full flex-col">
+        <div className="flex h-full max-h-[inherit] flex-col">
           {!hideTitle && (
             <div className="flex items-center justify-between gap-3 border-b border-white/[0.07] px-4 py-3">
               <h2 className="text-display text-base font-semibold">{title}</h2>

@@ -24,7 +24,7 @@ export function EntryDetail({
     <Sheet open={!!entry} onClose={onClose} title={entry ? entry.title : "Details"} side="right">
       {entry && (
         <div className="flex flex-col gap-6 p-5">
-          <div className="relative -mx-5 -mt-5 overflow-hidden px-5 pb-2 pt-6">
+          <div className="relative -mx-5 -mt-5 overflow-hidden px-5 pt-6 pb-2">
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 opacity-50"
@@ -36,7 +36,7 @@ export function EntryDetail({
                 <Eyebrow>
                   {TYPE_LABEL[entry.type]} · {entry.year}
                 </Eyebrow>
-                <p className="text-display mt-1 text-xl font-semibold leading-tight">{entry.title}</p>
+                <p className="mt-1 text-display text-xl leading-tight font-semibold">{entry.title}</p>
                 <p className="text-sm text-ink-muted">{entry.creator}</p>
                 <p className="mt-2 text-xs text-ink-faint">Updated {entry.updated}</p>
               </div>
@@ -46,7 +46,7 @@ export function EntryDetail({
           <DemoBadge label="Edits stay in this tab — not saved" className="self-start" />
 
           <fieldset>
-            <legend className="text-meta mb-2 text-ink-faint">Ownership</legend>
+            <legend className="mb-2 text-meta text-ink-faint">Ownership</legend>
             <div className="flex gap-1.5">
               {(["owned", "wishlist"] as Ownership[]).map((o) => (
                 <Chip key={o} pressed={entry.ownership === o} onClick={() => onChange({ ownership: o })}>
@@ -57,7 +57,7 @@ export function EntryDetail({
           </fieldset>
 
           <fieldset>
-            <legend className="text-meta mb-2 text-ink-faint">Status</legend>
+            <legend className="mb-2 text-meta text-ink-faint">Status</legend>
             <div className="flex flex-wrap gap-1.5">
               {(["backlog", "in_progress", "completed"] as ProgressStatus[]).map((s) => (
                 <Chip
@@ -67,7 +67,8 @@ export function EntryDetail({
                     onChange({
                       status: s,
                       progress: s === "completed" ? 100 : s === "backlog" ? 0 : Math.max(entry.progress, 1),
-                      progressLabel: s === "completed" ? "Completed" : s === "backlog" ? "Not started" : entry.progressLabel,
+                      progressLabel:
+                        s === "completed" ? "Completed" : s === "backlog" ? "Not started" : entry.progressLabel,
                     })
                   }
                 >
@@ -78,9 +79,9 @@ export function EntryDetail({
           </fieldset>
 
           <div>
-            <label htmlFor="progress" className="text-meta mb-2 flex justify-between text-ink-faint">
+            <label htmlFor="progress" className="mb-2 flex justify-between text-meta text-ink-faint">
               <span>Progress</span>
-              <span className="tabular-nums text-ink">{entry.progress}%</span>
+              <span className="text-ink tabular-nums">{entry.progress}%</span>
             </label>
             <input
               id="progress"
@@ -93,7 +94,14 @@ export function EntryDetail({
                 const p = Number(e.target.value);
                 onChange({
                   progress: p,
-                  status: p >= 100 ? "completed" : p > 0 ? "in_progress" : entry.status === "completed" ? "backlog" : entry.status,
+                  status:
+                    p >= 100
+                      ? "completed"
+                      : p > 0
+                        ? "in_progress"
+                        : entry.status === "completed"
+                          ? "backlog"
+                          : entry.status,
                   progressLabel: `${p}%`,
                 });
               }}
@@ -102,7 +110,7 @@ export function EntryDetail({
           </div>
 
           <fieldset>
-            <legend className="text-meta mb-2 text-ink-faint">Rating</legend>
+            <legend className="mb-2 text-meta text-ink-faint">Rating</legend>
             <div role="radiogroup" aria-label="Rating" className="flex items-center gap-1">
               {[1, 2, 3, 4, 5].map((n) => (
                 <button
@@ -118,17 +126,21 @@ export function EntryDetail({
                     aria-hidden
                     className={cn(
                       "size-5 transition-transform",
-                      entry.rating !== null && n <= entry.rating ? "scale-110 fill-personal text-personal" : "text-ink-ghost",
+                      entry.rating !== null && n <= entry.rating
+                        ? "scale-110 fill-personal text-personal"
+                        : "text-ink-ghost",
                     )}
                   />
                 </button>
               ))}
-              <span className="ml-2 text-xs text-ink-faint">{entry.rating === null ? "Not rated" : `${entry.rating}/5`}</span>
+              <span className="ml-2 text-xs text-ink-faint">
+                {entry.rating === null ? "Not rated" : `${entry.rating}/5`}
+              </span>
             </div>
           </fieldset>
 
           <div>
-            <label htmlFor="notes" className="text-meta mb-2 block text-ink-faint">
+            <label htmlFor="notes" className="mb-2 block text-meta text-ink-faint">
               Notes
             </label>
             <textarea

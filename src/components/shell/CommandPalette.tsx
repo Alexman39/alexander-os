@@ -106,7 +106,9 @@ export function CommandPalette() {
         <Kbd>Esc</Kbd>
       </div>
       <ul id="palette-list" role="listbox" aria-label="Commands" className="max-h-[50vh] overflow-y-auto p-2">
-        {filtered.length === 0 && <li className="px-3 py-6 text-center text-sm text-ink-muted">No matching commands.</li>}
+        {filtered.length === 0 && (
+          <li className="px-3 py-6 text-center text-sm text-ink-muted">No matching commands.</li>
+        )}
         {filtered.map((c, i) => {
           const Icon = c.icon;
           return (

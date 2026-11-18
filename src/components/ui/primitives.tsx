@@ -208,7 +208,9 @@ export function PageHeading({
           <span aria-hidden className="h-px w-10 bg-(--module-accent) opacity-60" />
           {kicker}
         </div>
-        <h1 className="text-display mt-1 text-4xl font-semibold leading-none text-ink sm:text-5xl lg:text-6xl">{title}</h1>
+        <h1 className="mt-1 text-display text-4xl leading-none font-semibold text-ink sm:text-5xl lg:text-6xl">
+          {title}
+        </h1>
       </div>
       {children}
     </header>

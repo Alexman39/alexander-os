@@ -46,7 +46,9 @@ export function SettingsView() {
               onClick={() => setMotion(v)}
               className={cn(
                 "rounded-md p-3 text-left transition-[background,box-shadow]",
-                motion === v ? "bg-lime/[0.12] shadow-[inset_0_0_0_1.5px_var(--color-lime)]" : "bg-white/[0.04] hover:bg-white/[0.07]",
+                motion === v
+                  ? "bg-lime/[0.12] shadow-[inset_0_0_0_1.5px_var(--color-lime)]"
+                  : "bg-white/[0.04] hover:bg-white/[0.07]",
               )}
             >
               <span className="block text-sm font-semibold text-ink">{l}</span>
@@ -54,11 +56,16 @@ export function SettingsView() {
             </button>
           ))}
         </div>
-        <p className="mt-3 text-xs text-ink-faint">Currently: {reducedMotion ? "reduced motion active" : "full motion active"}.</p>
+        <p className="mt-3 text-xs text-ink-faint">
+          Currently: {reducedMotion ? "reduced motion active" : "full motion active"}.
+        </p>
       </Panel>
 
       <Panel title="Ambience" eyebrow="Atmosphere">
-        <Row label="Ambient background motion" hint="Slow aurora drift and light ribbon. Paused automatically with reduced motion.">
+        <Row
+          label="Ambient background motion"
+          hint="Slow aurora drift and light ribbon. Paused automatically with reduced motion."
+        >
           <Toggle checked={ambient} onChange={() => setAmbient(!ambient)} label="Ambient background motion" />
         </Row>
         <Row label="Interface sounds" hint="Opt-in only, muted by default. Not available in this prototype.">
@@ -69,8 +76,8 @@ export function SettingsView() {
       <Panel title="Demo mode" eyebrow="Data">
         <div className="flex flex-wrap items-center gap-3 text-sm text-ink-muted">
           <DemoBadge label="On" />
-          Everything you see is fictional sample data. No database, authentication or external API is connected. Edits live only in this
-          browser tab.
+          Everything you see is fictional sample data. No database, authentication or external API is connected. Edits
+          live only in this browser tab.
         </div>
       </Panel>
 
@@ -83,7 +90,9 @@ export function SettingsView() {
             </Fragment>
           ))}
         </dl>
-        <p className="mt-3 text-xs text-ink-faint">Tab, Enter and Escape always work; arrow-key navigation is an enhancement.</p>
+        <p className="mt-3 text-xs text-ink-faint">
+          Tab, Enter and Escape always work; arrow-key navigation is an enhancement.
+        </p>
       </Panel>
     </div>
   );
@@ -91,9 +100,9 @@ export function SettingsView() {
 
 function Panel({ title, eyebrow, children }: { title: string; eyebrow: string; children: ReactNode }) {
   return (
-    <section aria-labelledby={`set-${title}`} className="surface-1 rounded-(--radius-panel) p-5">
+    <section aria-labelledby={`set-${title}`} className="rounded-(--radius-panel) p-5 surface-1">
       <Eyebrow>{eyebrow}</Eyebrow>
-      <h2 id={`set-${title}`} className="text-display mb-4 mt-0.5 text-lg font-semibold">
+      <h2 id={`set-${title}`} className="mt-0.5 mb-4 text-display text-lg font-semibold">
         {title}
       </h2>
       {children}
@@ -113,7 +122,17 @@ function Row({ label, hint, children }: { label: string; hint: string; children:
   );
 }
 
-function Toggle({ checked, onChange, label, disabled }: { checked: boolean; onChange: () => void; label: string; disabled?: boolean }) {
+function Toggle({
+  checked,
+  onChange,
+  label,
+  disabled,
+}: {
+  checked: boolean;
+  onChange: () => void;
+  label: string;
+  disabled?: boolean;
+}) {
   return (
     <button
       type="button"
@@ -122,7 +141,10 @@ function Toggle({ checked, onChange, label, disabled }: { checked: boolean; onCh
       aria-label={label}
       disabled={disabled}
       onClick={onChange}
-      className={cn("relative h-6 w-11 shrink-0 rounded-full transition-colors disabled:opacity-40", checked ? "bg-lime" : "bg-white/15")}
+      className={cn(
+        "relative h-6 w-11 shrink-0 rounded-full transition-colors disabled:opacity-40",
+        checked ? "bg-lime" : "bg-white/15",
+      )}
     >
       <span
         aria-hidden

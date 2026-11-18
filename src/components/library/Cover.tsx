@@ -9,7 +9,15 @@ const TYPE_ICON = { BOOK: BookOpen, GAME: Gamepad2, MOVIE: Clapperboard } as con
  * ship third-party artwork; each entry gets a generated, typographic cover
  * from its palette + pattern so shelves still feel like physical objects.
  */
-export function Cover({ entry, className, size = "md" }: { entry: LibraryEntry; className?: string; size?: "sm" | "md" | "lg" }) {
+export function Cover({
+  entry,
+  className,
+  size = "md",
+}: {
+  entry: LibraryEntry;
+  className?: string;
+  size?: "sm" | "md" | "lg";
+}) {
   const [from, to, ink] = entry.palette;
   const Icon = TYPE_ICON[entry.type];
   const aspect = entry.type === "GAME" ? "aspect-[3/4]" : "aspect-[2/3]";
@@ -28,14 +36,17 @@ export function Cover({ entry, className, size = "md" }: { entry: LibraryEntry; 
         <Icon aria-hidden className="size-[clamp(10px,11cqw,20px)] opacity-80" />
         <div className="min-w-0">
           <p
-            className="text-display font-bold leading-[1.02] [overflow-wrap:break-word] [text-wrap:balance]"
+            className="text-display leading-[1.02] font-bold [text-wrap:balance] [overflow-wrap:break-word]"
             style={{ fontSize: "clamp(7.5px, 11cqw, 28px)", hyphens: "auto" }}
             lang="en"
           >
             {entry.title}
           </p>
           {size !== "sm" && (
-            <p className="mt-[3cqw] truncate font-mono uppercase tracking-wider opacity-75" style={{ fontSize: "clamp(7px, 6cqw, 11px)" }}>
+            <p
+              className="mt-[3cqw] truncate font-mono tracking-wider uppercase opacity-75"
+              style={{ fontSize: "clamp(7px, 6cqw, 11px)" }}
+            >
               {entry.creator}
             </p>
           )}
@@ -46,7 +57,11 @@ export function Cover({ entry, className, size = "md" }: { entry: LibraryEntry; 
 }
 
 function Pattern({ kind, color }: { kind: LibraryEntry["pattern"]; color: string }) {
-  const common = { className: "absolute inset-0 h-full w-full", "aria-hidden": true, preserveAspectRatio: "xMidYMid slice" } as const;
+  const common = {
+    className: "absolute inset-0 h-full w-full",
+    "aria-hidden": true,
+    preserveAspectRatio: "xMidYMid slice",
+  } as const;
   switch (kind) {
     case "rings":
       return (
@@ -60,7 +75,15 @@ function Pattern({ kind, color }: { kind: LibraryEntry["pattern"]; color: string
       return (
         <svg viewBox="0 0 100 150" {...common}>
           {Array.from({ length: 9 }, (_, i) => (
-            <rect key={i} x={i * 12} y={20 + (i % 3) * 8} width="5" height="80" fill={color} fillOpacity={0.08 + (i % 4) * 0.03} />
+            <rect
+              key={i}
+              x={i * 12}
+              y={20 + (i % 3) * 8}
+              width="5"
+              height="80"
+              fill={color}
+              fillOpacity={0.08 + (i % 4) * 0.03}
+            />
           ))}
         </svg>
       );

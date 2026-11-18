@@ -49,7 +49,12 @@ export function Blades<T extends string>({
     onChange(items[next].id);
   }
   return (
-    <div role="tablist" aria-label={label} aria-orientation="vertical" className={cn("flex gap-1.5 lg:flex-col", className)}>
+    <div
+      role="tablist"
+      aria-label={label}
+      aria-orientation="vertical"
+      className={cn("flex gap-1.5 lg:flex-col", className)}
+    >
       {items.map((it, i) => {
         const on = it.id === value;
         return (
@@ -80,7 +85,11 @@ export function Blades<T extends string>({
             {it.icon && <span className={cn("shrink-0", on ? "text-(--blade)" : "")}>{it.icon}</span>}
             <span className="text-display whitespace-nowrap">{it.label}</span>
             {it.count !== undefined && (
-              <span className={cn("ml-auto pr-3 font-mono text-xs tabular-nums", on ? "text-(--blade)" : "text-ink-ghost")}>{it.count}</span>
+              <span
+                className={cn("ml-auto pr-3 font-mono text-xs tabular-nums", on ? "text-(--blade)" : "text-ink-ghost")}
+              >
+                {it.count}
+              </span>
             )}
           </button>
         );

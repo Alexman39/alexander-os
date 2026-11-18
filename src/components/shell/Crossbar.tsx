@@ -74,12 +74,16 @@ export function Crossbar() {
                       : "size-8 group-hover/xb:scale-110 group-focus-visible/xb:scale-110",
                   )}
                 >
-                  <Icon aria-hidden className={isActive ? "size-[18px]" : "size-[17px]"} strokeWidth={isActive ? 2.2 : 1.8} />
+                  <Icon
+                    aria-hidden
+                    className={isActive ? "size-[18px]" : "size-[17px]"}
+                    strokeWidth={isActive ? 2.2 : 1.8}
+                  />
                 </span>
                 {/* Label: always present for AT; visually expands when active/hovered/focused */}
                 <span
                   className={cn(
-                    "text-display overflow-hidden whitespace-nowrap text-sm font-semibold transition-[max-width,opacity] duration-(--duration-spatial) ease-(--ease-glide)",
+                    "overflow-hidden text-display text-sm font-semibold whitespace-nowrap transition-[max-width,opacity] duration-(--duration-spatial) ease-(--ease-glide)",
                     isActive
                       ? "max-w-32 opacity-100"
                       : cn(

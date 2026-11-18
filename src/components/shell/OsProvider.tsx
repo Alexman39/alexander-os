@@ -1,15 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useMediaQuery, usePref, writePref } from "@/lib/client-stores";
 
 export type MotionPref = "system" | "reduced" | "full";
@@ -116,7 +107,20 @@ export function OsProvider({ children }: { children: ReactNode }) {
       tint,
       setTint,
     }),
-    [motion, setMotion, ambient, setAmbient, reducedMotion, captured, capture, paletteOpen, captureOpen, toasts, toast, tint],
+    [
+      motion,
+      setMotion,
+      ambient,
+      setAmbient,
+      reducedMotion,
+      captured,
+      capture,
+      paletteOpen,
+      captureOpen,
+      toasts,
+      toast,
+      tint,
+    ],
   );
 
   return <OsContext.Provider value={value}>{children}</OsContext.Provider>;

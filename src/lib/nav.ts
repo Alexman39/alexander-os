@@ -12,15 +12,7 @@ import {
 } from "lucide-react";
 
 export type ModuleId =
-  | "home"
-  | "life"
-  | "work"
-  | "university"
-  | "health"
-  | "library"
-  | "intelligence"
-  | "assistant"
-  | "settings";
+  "home" | "life" | "work" | "university" | "health" | "library" | "intelligence" | "assistant" | "settings";
 
 export interface NavModule {
   id: ModuleId;

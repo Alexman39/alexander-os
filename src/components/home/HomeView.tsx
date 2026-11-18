@@ -24,7 +24,14 @@ import { useOs } from "@/components/shell/OsProvider";
 import { useAthensMinutes, useGreeting } from "@/components/shell/Clock";
 import { cn } from "@/lib/cn";
 import { NAV } from "@/lib/nav";
-import { DEMO_BRIEFING, DEMO_FOCUS, DEMO_GOALS, DEMO_PROJECTS, DEMO_SCHEDULE, type DemoScheduleItem } from "@/lib/demo/home";
+import {
+  DEMO_BRIEFING,
+  DEMO_FOCUS,
+  DEMO_GOALS,
+  DEMO_PROJECTS,
+  DEMO_SCHEDULE,
+  type DemoScheduleItem,
+} from "@/lib/demo/home";
 import { DEMO_EVENTS, DEMO_INTERESTS } from "@/lib/demo/intelligence";
 import { DEMO_LIBRARY } from "@/lib/demo/library";
 import { computeRelevance } from "@/lib/relevance";
@@ -56,7 +63,7 @@ export function HomeView() {
         <header className="flex flex-wrap items-end justify-between gap-4 pt-2 lg:pt-4">
           <div>
             <Eyebrow tone="var(--color-lime)">01 · Home</Eyebrow>
-            <h1 className="text-display mt-1 text-[2.6rem] font-semibold leading-[0.95] sm:text-6xl lg:text-7xl">
+            <h1 className="mt-1 text-display text-[2.6rem] leading-[0.95] font-semibold sm:text-6xl lg:text-7xl">
               {greeting},
               <br className="sm:hidden" /> <span className="text-ink-muted">Alexander.</span>
             </h1>
@@ -64,7 +71,7 @@ export function HomeView() {
           <button
             type="button"
             onClick={() => setCaptureOpen(true)}
-            className="surface-1 group flex h-12 w-full items-center gap-3 rounded-md px-4 text-left text-sm text-ink-faint transition-shadow hover:text-ink-muted sm:w-[380px]"
+            className="group flex h-12 w-full items-center gap-3 rounded-md px-4 text-left text-sm text-ink-faint surface-1 transition-shadow hover:text-ink-muted sm:w-[380px]"
           >
             <Plus aria-hidden className="size-4 text-lime" />
             Capture a task, note or idea…
@@ -108,7 +115,11 @@ function BriefingHero({ className }: { className?: string }) {
       emptyText="No briefing yet — empty briefings are valid when nothing crossed your relevance threshold."
     >
       {/* orbit illustration */}
-      <svg aria-hidden viewBox="0 0 400 400" className="pointer-events-none absolute -right-24 -top-20 h-[420px] w-[420px] opacity-60">
+      <svg
+        aria-hidden
+        viewBox="0 0 400 400"
+        className="pointer-events-none absolute -top-20 -right-24 h-[420px] w-[420px] opacity-60"
+      >
         <defs>
           <radialGradient id="core" cx="0.5" cy="0.5" r="0.5">
             <stop offset="0" stopColor="#ad8cff" stopOpacity="0.55" />
@@ -140,18 +151,21 @@ function BriefingHero({ className }: { className?: string }) {
           <li key={h.id}>
             <Link
               href={`/intelligence#${h.id}`}
-              className="group/hl flex items-start gap-4 rounded-md px-2 py-2.5 -mx-2 transition-colors hover:bg-white/[0.05]"
+              className="group/hl -mx-2 flex items-start gap-4 rounded-md px-2 py-2.5 transition-colors hover:bg-white/[0.05]"
             >
-              <span className="text-display w-7 shrink-0 text-2xl font-semibold leading-none text-intel/70 group-hover/hl:text-intel">
+              <span className="w-7 shrink-0 text-display text-2xl leading-none font-semibold text-intel/70 group-hover/hl:text-intel">
                 {String(n + 1).padStart(2, "0")}
               </span>
               <span className="min-w-0">
-                <span className="block text-[15px] font-medium leading-snug text-ink">{h.text}</span>
+                <span className="block text-[15px] leading-snug font-medium text-ink">{h.text}</span>
                 <span className="mt-1 flex items-center gap-2 text-xs text-ink-faint">
                   <span className="text-intel">{h.interest}</span>·<span>{h.sources} sources</span>
                 </span>
               </span>
-              <ArrowRight aria-hidden className="ml-auto mt-1 size-4 shrink-0 text-ink-faint opacity-0 transition-opacity group-hover/hl:opacity-100" />
+              <ArrowRight
+                aria-hidden
+                className="mt-1 ml-auto size-4 shrink-0 text-ink-faint opacity-0 transition-opacity group-hover/hl:opacity-100"
+              />
             </Link>
           </li>
         ))}
@@ -203,13 +217,20 @@ function FocusTile({ className }: { className?: string }) {
                 aria-hidden
                 className={cn(
                   "mt-0.5 grid size-5 shrink-0 place-items-center rounded-[4px] transition-all duration-(--duration-quick) peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-lime",
-                  t.done ? "bg-lime text-void" : "shadow-[inset_0_0_0_1.5px_var(--color-ink-faint)] group-hover/task:shadow-[inset_0_0_0_1.5px_var(--color-lime)]",
+                  t.done
+                    ? "bg-lime text-void"
+                    : "shadow-[inset_0_0_0_1.5px_var(--color-ink-faint)] group-hover/task:shadow-[inset_0_0_0_1.5px_var(--color-lime)]",
                 )}
               >
                 {t.done && <Check className="size-3.5" strokeWidth={3} />}
               </span>
               <span className="min-w-0">
-                <span className={cn("block text-sm font-medium leading-snug", t.done ? "text-ink-faint line-through" : "text-ink")}>
+                <span
+                  className={cn(
+                    "block text-sm leading-snug font-medium",
+                    t.done ? "text-ink-faint line-through" : "text-ink",
+                  )}
+                >
                   {t.title}
                 </span>
                 <span className="mt-0.5 flex items-center gap-2 text-xs text-ink-faint">
@@ -233,7 +254,7 @@ function FocusTile({ className }: { className?: string }) {
           <Eyebrow>Inbox · captured this session</Eyebrow>
           <ul className="mt-1.5 flex flex-col gap-1">
             {captured.slice(0, 3).map((c) => (
-              <li key={c.id} className="animate-rise flex items-center gap-2 text-sm text-ink-muted">
+              <li key={c.id} className="flex animate-rise items-center gap-2 text-sm text-ink-muted">
                 <Chip className="py-0.5 text-[10px] uppercase">{c.kind}</Chip>
                 <span className="truncate">{c.text}</span>
               </li>
@@ -263,23 +284,35 @@ function TodayTile({ className }: { className?: string }) {
       emptyText="Nothing scheduled. Calendar not connected."
     >
       <ol className="relative flex flex-col">
-        <span aria-hidden className="absolute bottom-2 left-[51px] top-2 w-px bg-white/[0.08]" />
+        <span aria-hidden className="absolute top-2 bottom-2 left-[51px] w-px bg-white/[0.08]" />
         {DEMO_SCHEDULE.map((e, n) => {
           const past = now !== null && toMin(e.end) <= now;
           const current = now !== null && toMin(e.start) <= now && toMin(e.end) > now;
           const isNext = n === nextIdx && !current;
           return (
             <li key={e.id} className={cn("relative flex gap-3 py-2", past && "opacity-45")}>
-              <span className="w-10 shrink-0 pt-0.5 text-right font-mono text-xs tabular-nums text-ink-faint">{e.start}</span>
+              <span className="w-10 shrink-0 pt-0.5 text-right font-mono text-xs text-ink-faint tabular-nums">
+                {e.start}
+              </span>
               <span
                 aria-hidden
-                className={cn("relative z-10 mt-1.5 size-2.5 shrink-0 rounded-full ring-4 ring-deep", current && "animate-pulse")}
-                style={{ background: KIND_TONE[e.kind], boxShadow: current ? `0 0 12px ${KIND_TONE[e.kind]}` : undefined }}
+                className={cn(
+                  "relative z-10 mt-1.5 size-2.5 shrink-0 rounded-full ring-4 ring-deep",
+                  current && "animate-pulse",
+                )}
+                style={{
+                  background: KIND_TONE[e.kind],
+                  boxShadow: current ? `0 0 12px ${KIND_TONE[e.kind]}` : undefined,
+                }}
               />
               <div
                 className={cn(
                   "min-w-0 flex-1 rounded-[5px] px-2.5 py-1.5",
-                  current ? "bg-white/[0.08] shadow-[inset_0_0_0_1px_var(--edge-strong)]" : isNext ? "bg-white/[0.04]" : "",
+                  current
+                    ? "bg-white/[0.08] shadow-[inset_0_0_0_1px_var(--edge-strong)]"
+                    : isNext
+                      ? "bg-white/[0.04]"
+                      : "",
                 )}
               >
                 <p className="truncate text-sm font-medium text-ink">{e.title}</p>
@@ -305,14 +338,18 @@ function IntelLiveTile({ className }: { className?: string }) {
     const interest = DEMO_INTERESTS.find((i) => i.id === e.interestId)!;
     const score = computeRelevance(e.factors);
     return (
-      <Link key={e.id} href={`/intelligence#${e.id}`} className="flex h-full flex-col rounded-md focus-visible:outline-offset-4">
+      <Link
+        key={e.id}
+        href={`/intelligence#${e.id}`}
+        className="flex h-full flex-col rounded-md focus-visible:outline-offset-4"
+      >
         <span className="flex items-center gap-2 text-xs">
           <span className="font-medium" style={{ color: interest.color }}>
             {interest.name}
           </span>
-          <span className="ml-auto font-mono tabular-nums text-ink-faint">{score}</span>
+          <span className="ml-auto font-mono text-ink-faint tabular-nums">{score}</span>
         </span>
-        <span className="text-display mt-2 line-clamp-3 text-lg font-semibold leading-tight text-ink">{e.title}</span>
+        <span className="mt-2 line-clamp-3 text-display text-lg leading-tight font-semibold text-ink">{e.title}</span>
         <span className="mt-auto pt-2 text-xs text-ink-faint">{e.sources.length} sources · fictional</span>
       </Link>
     );
@@ -334,11 +371,17 @@ function IntelLiveTile({ className }: { className?: string }) {
 function LibraryNowTile({ className }: { className?: string }) {
   const current = DEMO_LIBRARY.filter((e) => e.status === "in_progress");
   const faces = current.map((e) => (
-    <Link key={e.id} href={`/library?focus=${e.id}`} className="flex h-full gap-4 rounded-md focus-visible:outline-offset-4">
+    <Link
+      key={e.id}
+      href={`/library?focus=${e.id}`}
+      className="flex h-full gap-4 rounded-md focus-visible:outline-offset-4"
+    >
       <Cover entry={e} size="sm" className="w-[72px] shrink-0 shadow-[0_12px_24px_-10px_rgb(0_0_0/0.8)]" />
       <span className="flex min-w-0 flex-col">
-        <span className="text-xs text-personal">{e.type === "GAME" ? "Playing" : e.type === "MOVIE" ? "Watching" : "Reading"}</span>
-        <span className="text-display mt-1 line-clamp-2 text-base font-semibold leading-tight text-ink">{e.title}</span>
+        <span className="text-xs text-personal">
+          {e.type === "GAME" ? "Playing" : e.type === "MOVIE" ? "Watching" : "Reading"}
+        </span>
+        <span className="mt-1 line-clamp-2 text-display text-base leading-tight font-semibold text-ink">{e.title}</span>
         <span className="mt-0.5 truncate text-xs text-ink-faint">{e.creator}</span>
         <span className="mt-auto">
           <span className="mb-1 flex justify-between text-xs text-ink-muted">
@@ -377,8 +420,14 @@ function ProgressTile({ className }: { className?: string }) {
       <ul className="flex justify-between gap-2 pt-1">
         {DEMO_GOALS.map((g) => (
           <li key={g.id} className="flex flex-col items-center gap-2 text-center">
-            <Ring value={g.value} max={g.target} tone={TONE_VAR[g.tone]} size={72} label={`${g.label}: ${g.value} of ${g.target} ${g.unit}`}>
-              <span className="text-display text-lg font-semibold tabular-nums leading-none">{g.value}</span>
+            <Ring
+              value={g.value}
+              max={g.target}
+              tone={TONE_VAR[g.tone]}
+              size={72}
+              label={`${g.label}: ${g.value} of ${g.target} ${g.unit}`}
+            >
+              <span className="text-display text-lg leading-none font-semibold tabular-nums">{g.value}</span>
             </Ring>
             <span>
               <span className="block text-xs font-medium text-ink">{g.label}</span>
@@ -405,15 +454,25 @@ function ProjectsTile({ className }: { className?: string }) {
     >
       <ul className="flex flex-col divide-y divide-white/[0.06]">
         {DEMO_PROJECTS.map((p) => (
-          <li key={p.id} className="grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-1.5 py-2.5 first:pt-0 sm:grid-cols-[1fr_140px_auto]">
+          <li
+            key={p.id}
+            className="grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-1.5 py-2.5 first:pt-0 sm:grid-cols-[1fr_140px_auto]"
+          >
             <div className="min-w-0">
               <p className="truncate text-sm font-medium text-ink">{p.name}</p>
               <p className="truncate text-xs text-ink-faint">
                 Next: <span className="text-ink-muted">{p.nextAction}</span>
               </p>
             </div>
-            <Meter value={p.progress} tone="var(--color-system)" label={`${p.name} progress`} className="col-span-2 row-start-2 sm:col-span-1 sm:row-start-auto" />
-            <span className="text-right font-mono text-xs tabular-nums text-ink-muted sm:order-last">{p.progress}%</span>
+            <Meter
+              value={p.progress}
+              tone="var(--color-system)"
+              label={`${p.name} progress`}
+              className="col-span-2 row-start-2 sm:col-span-1 sm:row-start-auto"
+            />
+            <span className="text-right font-mono text-xs text-ink-muted tabular-nums sm:order-last">
+              {p.progress}%
+            </span>
           </li>
         ))}
       </ul>
@@ -446,12 +505,12 @@ function AssistantEntry({ className }: { className?: string }) {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="What should I focus on tomorrow?"
-          className="h-11 w-full rounded-md bg-white/[0.04] pl-3 pr-11 text-sm text-ink shadow-[inset_0_0_0_1px_var(--edge-strong)] placeholder:text-ink-faint focus:outline-none focus-visible:shadow-[inset_0_0_0_2px_var(--color-system)]"
+          className="h-11 w-full rounded-md bg-white/[0.04] pr-11 pl-3 text-sm text-ink shadow-[inset_0_0_0_1px_var(--edge-strong)] placeholder:text-ink-faint focus:outline-none focus-visible:shadow-[inset_0_0_0_2px_var(--color-system)]"
         />
         <button
           type="submit"
           aria-label="Ask"
-          className="absolute right-1.5 top-1.5 grid size-8 place-items-center rounded-[5px] bg-system text-void"
+          className="absolute top-1.5 right-1.5 grid size-8 place-items-center rounded-[5px] bg-system text-void"
         >
           <CornerDownLeft aria-hidden className="size-4" />
         </button>
@@ -483,16 +542,16 @@ function ModuleShortcuts({ className }: { className?: string }) {
             key={m.id}
             href={m.href}
             style={{ "--item-accent": m.accent } as React.CSSProperties}
-            className="surface-1 group relative flex min-h-[92px] flex-col justify-between overflow-hidden rounded-(--radius-tile) p-3 transition-transform duration-(--duration-spatial) ease-(--ease-glide) hover:-translate-y-0.5"
+            className="group relative flex min-h-[92px] flex-col justify-between overflow-hidden rounded-(--radius-tile) p-3 surface-1 transition-transform duration-(--duration-spatial) ease-(--ease-glide) hover:-translate-y-0.5"
           >
             <span
               aria-hidden
-              className="absolute -right-6 -top-6 size-20 rounded-full opacity-25 blur-xl transition-opacity group-hover:opacity-50"
+              className="absolute -top-6 -right-6 size-20 rounded-full opacity-25 blur-xl transition-opacity group-hover:opacity-50"
               style={{ background: m.accent }}
             />
             <Icon aria-hidden className="relative size-5 text-(--item-accent)" />
             <span className="relative">
-              <span className="text-display block text-sm font-semibold text-ink">{m.label}</span>
+              <span className="block text-display text-sm font-semibold text-ink">{m.label}</span>
               <span className="block text-[11px] text-ink-faint">Not designed yet</span>
             </span>
           </Link>

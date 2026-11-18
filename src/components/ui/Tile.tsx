@@ -65,19 +65,23 @@ export function Tile({
       {/* edge illumination on hover/focus — tactile selection */}
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-(--duration-spatial) group-hover/tile:opacity-100 group-focus-within/tile:opacity-100"
+        className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-(--duration-spatial) group-focus-within/tile:opacity-100 group-hover/tile:opacity-100"
         style={{
           boxShadow:
             "inset 0 0 0 1px color-mix(in oklab, var(--tile-tone) 45%, transparent), 0 0 36px -10px color-mix(in oklab, var(--tile-tone) 60%, transparent)",
         }}
       />
       {/* tone stripe */}
-      <span aria-hidden className="absolute inset-y-0 left-0 w-[3px]" style={{ background: "var(--tile-tone)", opacity: 0.85 }} />
+      <span
+        aria-hidden
+        className="absolute inset-y-0 left-0 w-[3px]"
+        style={{ background: "var(--tile-tone)", opacity: 0.85 }}
+      />
 
       <header className="relative flex items-start justify-between gap-3 px-4 pt-3.5 pb-2 sm:px-5">
         <div className="min-w-0">
           {eyebrow && <Eyebrow tone="var(--tile-tone)">{eyebrow}</Eyebrow>}
-          <h2 id={id} className="text-display mt-0.5 flex items-center gap-2 truncate text-base font-semibold text-ink">
+          <h2 id={id} className="mt-0.5 flex items-center gap-2 truncate text-display text-base font-semibold text-ink">
             {icon}
             {title}
           </h2>

@@ -40,7 +40,12 @@ test.describe("shell & navigation", () => {
 
   test("crossbar shows every label on wide screens, icons only on narrower ones", async ({ page }) => {
     const label = (name: string) =>
-      page.getByRole("navigation", { name: "Modules" }).first().getByRole("link", { name, exact: true }).locator("span").nth(1);
+      page
+        .getByRole("navigation", { name: "Modules" })
+        .first()
+        .getByRole("link", { name, exact: true })
+        .locator("span")
+        .nth(1);
     await page.setViewportSize({ width: 1920, height: 1000 });
     await gotoHydrated(page, "/");
     await expect(label("Intelligence")).toHaveCSS("opacity", "1");
@@ -137,7 +142,9 @@ test.describe("library", () => {
     await first.focus();
     await page.keyboard.press("ArrowRight");
     await expect(page.getByRole("button", { name: /^Outer Wilds, Game/ })).toBeFocused();
-    await expect(page.getByRole("region", { name: "Selected item" }).getByRole("heading", { name: "Outer Wilds" })).toBeVisible();
+    await expect(
+      page.getByRole("region", { name: "Selected item" }).getByRole("heading", { name: "Outer Wilds" }),
+    ).toBeVisible();
     await page.keyboard.press("ArrowDown");
     await expect(page.locator('[data-shelf="1"][data-index="1"]')).toBeFocused();
   });
@@ -154,7 +161,10 @@ test.describe("library", () => {
 test.describe("intelligence", () => {
   test("lead event shows provenance and relevance breakdown", async ({ page }) => {
     await page.goto("/intelligence");
-    await page.getByRole("button", { name: /Evidence, sources & feedback/ }).first().click();
+    await page
+      .getByRole("button", { name: /Evidence, sources & feedback/ })
+      .first()
+      .click();
     await expect(page.getByText(/Relevance breakdown · 89\/100/)).toBeVisible();
     await expect(page.getByRole("link", { name: /Demo Lab Blog/ })).toHaveAttribute("href", /example\.com/);
   });

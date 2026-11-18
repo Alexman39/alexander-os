@@ -20,7 +20,7 @@ export function MobileDock() {
     <>
       <nav
         aria-label="Modules"
-        className="surface-3 fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-40 rounded-[14px] lg:hidden"
+        className="fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-40 rounded-[14px] surface-3 lg:hidden"
       >
         <ul className="grid grid-cols-5">
           {dock.map((m) => {
@@ -36,10 +36,17 @@ export function MobileDock() {
                     isActive ? "text-ink" : "text-ink-faint",
                   )}
                 >
-                  <Icon aria-hidden className={cn("size-5", isActive && "text-lime")} strokeWidth={isActive ? 2.3 : 1.8} />
+                  <Icon
+                    aria-hidden
+                    className={cn("size-5", isActive && "text-lime")}
+                    strokeWidth={isActive ? 2.3 : 1.8}
+                  />
                   {m.label}
                   {isActive && (
-                    <span aria-hidden className="absolute top-0 h-[3px] w-8 rounded-b-full bg-lime shadow-[0_0_12px_var(--color-lime)]" />
+                    <span
+                      aria-hidden
+                      className="absolute top-0 h-[3px] w-8 rounded-b-full bg-lime shadow-[0_0_12px_var(--color-lime)]"
+                    />
                   )}
                 </Link>
               </li>
@@ -58,7 +65,10 @@ export function MobileDock() {
               <LayoutGrid aria-hidden className={cn("size-5", !activeInDock && "text-lime")} />
               More
               {!activeInDock && (
-                <span aria-hidden className="absolute top-0 h-[3px] w-8 rounded-b-full bg-lime shadow-[0_0_12px_var(--color-lime)]" />
+                <span
+                  aria-hidden
+                  className="absolute top-0 h-[3px] w-8 rounded-b-full bg-lime shadow-[0_0_12px_var(--color-lime)]"
+                />
               )}
             </button>
           </li>

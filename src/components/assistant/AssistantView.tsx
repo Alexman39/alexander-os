@@ -60,7 +60,9 @@ const KIND_TONE: Record<Citation["kind"], string> = {
 };
 
 const nowLabel = () =>
-  new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Athens" }).format(new Date());
+  new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Athens" }).format(
+    new Date(),
+  );
 
 export function AssistantView() {
   const params = useSearchParams();
@@ -99,7 +101,10 @@ export function AssistantView() {
         push(reply);
         setThinking(false);
         if (reply.tools?.length) {
-          setAudit((a) => [{ at: nowLabel(), text: `Auto-ran ${reply.tools!.map((x) => x.tool).join(", ")} (read-only)` }, ...a]);
+          setAudit((a) => [
+            { at: nowLabel(), text: `Auto-ran ${reply.tools!.map((x) => x.tool).join(", ")} (read-only)` },
+            ...a,
+          ]);
         }
       },
       reducedMotion ? 150 : 1100,
@@ -136,7 +141,10 @@ export function AssistantView() {
   function decide(p: Proposal, d: Decision) {
     setDecisions((x) => ({ ...x, [p.id]: d }));
     setAudit((a) => [
-      { at: nowLabel(), text: `${d === "approved" ? "Approved" : "Declined"} ${p.tool} — ${p.title}${d === "approved" ? " (demo: nothing written)" : ""}` },
+      {
+        at: nowLabel(),
+        text: `${d === "approved" ? "Approved" : "Declined"} ${p.tool} — ${p.title}${d === "approved" ? " (demo: nothing written)" : ""}`,
+      },
       ...a,
     ]);
   }
@@ -152,7 +160,11 @@ export function AssistantView() {
 
   return (
     <div className="mx-auto flex max-w-[1520px] flex-col gap-5 pt-2 lg:pt-4">
-      <PageHeading index="08 · Assistant" title="Assistant" kicker={<DemoBadge label="Scripted · no model connected" />}>
+      <PageHeading
+        index="08 · Assistant"
+        title="Assistant"
+        kicker={<DemoBadge label="Scripted · no model connected" />}
+      >
         <button
           type="button"
           onClick={() => setContextOpen(true)}
@@ -176,7 +188,7 @@ export function AssistantView() {
           >
             <MessageSquarePlus aria-hidden className="size-4" /> New conversation
           </button>
-          <ul className="scrollbar-none -mx-4 flex gap-1.5 overflow-x-auto px-4 xl:mx-0 xl:flex-col xl:overflow-visible xl:px-0">
+          <ul className="-mx-4 scrollbar-none flex gap-1.5 overflow-x-auto px-4 xl:mx-0 xl:flex-col xl:overflow-visible xl:px-0">
             {convos.map((c) => {
               const on = c.id === active.id;
               return (
@@ -192,7 +204,9 @@ export function AssistantView() {
                         : "bg-white/[0.03] hover:bg-white/[0.06]",
                     )}
                   >
-                    <span className={cn("max-w-44 truncate text-sm font-medium", on ? "text-ink" : "text-ink-muted")}>{c.title}</span>
+                    <span className={cn("max-w-44 truncate text-sm font-medium", on ? "text-ink" : "text-ink-muted")}>
+                      {c.title}
+                    </span>
                     <span className="text-meta text-ink-faint">{c.when}</span>
                   </button>
                 </li>
@@ -202,26 +216,39 @@ export function AssistantView() {
         </nav>
 
         {/* Thread */}
-        <section aria-label={`Conversation: ${active.title}`} className="surface-1 flex min-h-[60vh] min-w-0 flex-col rounded-(--radius-panel)">
-          <div ref={logRef} role="log" aria-live="polite" aria-relevant="additions" className="flex-1 space-y-7 overflow-y-auto p-4 sm:p-6 xl:max-h-[calc(100dvh-330px)]">
+        <section
+          aria-label={`Conversation: ${active.title}`}
+          className="flex min-h-[60vh] min-w-0 flex-col rounded-(--radius-panel) surface-1"
+        >
+          <div
+            ref={logRef}
+            role="log"
+            aria-live="polite"
+            aria-relevant="additions"
+            className="flex-1 space-y-7 overflow-y-auto p-4 sm:p-6 xl:max-h-[calc(100dvh-330px)]"
+          >
             {active.turns.length === 0 && (
               <div className="grid h-full place-items-center py-16 text-center">
                 <div>
                   <Sparkles aria-hidden className="mx-auto size-8 text-system" />
-                  <p className="text-display mt-3 text-xl font-semibold">Ask about your tasks, schedule, library or briefings.</p>
-                  <p className="mt-1 text-sm text-ink-faint">Answers cite the records they use. Actions always wait for your approval.</p>
+                  <p className="mt-3 text-display text-xl font-semibold">
+                    Ask about your tasks, schedule, library or briefings.
+                  </p>
+                  <p className="mt-1 text-sm text-ink-faint">
+                    Answers cite the records they use. Actions always wait for your approval.
+                  </p>
                 </div>
               </div>
             )}
             {active.turns.map((t, i) =>
               t.role === "user" ? (
-                <div key={i} className="animate-rise flex gap-3 sm:gap-4">
-                  <span className="text-meta w-10 shrink-0 pt-1.5 text-lime sm:w-16">You</span>
-                  <p className="text-display text-lg font-medium leading-snug text-ink sm:text-xl">{t.text}</p>
+                <div key={i} className="flex animate-rise gap-3 sm:gap-4">
+                  <span className="w-10 shrink-0 pt-1.5 text-meta text-lime sm:w-16">You</span>
+                  <p className="text-display text-lg leading-snug font-medium text-ink sm:text-xl">{t.text}</p>
                 </div>
               ) : (
-                <div key={i} className="animate-rise flex gap-3 sm:gap-4">
-                  <span className="text-meta w-10 shrink-0 pt-1 text-system sm:w-16">AOS</span>
+                <div key={i} className="flex animate-rise gap-3 sm:gap-4">
+                  <span className="w-10 shrink-0 pt-1 text-meta text-system sm:w-16">AOS</span>
                   <div className="min-w-0 flex-1 space-y-3">
                     {t.tools && t.tools.length > 0 && <ToolTrace tools={t.tools} />}
                     <div className="space-y-3 text-[15px] leading-relaxed text-ink-muted">
@@ -232,7 +259,11 @@ export function AssistantView() {
                       ))}
                     </div>
                     {t.proposal && (
-                      <ProposalCard proposal={t.proposal} decision={decisions[t.proposal.id]} onDecide={(d) => decide(t.proposal!, d)} />
+                      <ProposalCard
+                        proposal={t.proposal}
+                        decision={decisions[t.proposal.id]}
+                        onDecide={(d) => decide(t.proposal!, d)}
+                      />
                     )}
                   </div>
                 </div>
@@ -240,7 +271,7 @@ export function AssistantView() {
             )}
             {thinking && (
               <div className="flex gap-3 sm:gap-4" aria-label="Assistant is responding">
-                <span className="text-meta w-10 shrink-0 pt-1 text-system sm:w-16">AOS</span>
+                <span className="w-10 shrink-0 pt-1 text-meta text-system sm:w-16">AOS</span>
                 <span className="flex items-center gap-1 pt-2" aria-hidden>
                   <span className="typing-dot size-1.5 rounded-full bg-system" />
                   <span className="typing-dot size-1.5 rounded-full bg-system" />
@@ -283,13 +314,13 @@ export function AssistantView() {
                 onChange={(e) => setDraft(e.target.value)}
                 onKeyDown={onComposerKey}
                 placeholder="Ask anything about your records…  (Enter to send, Shift+Enter for newline)"
-                className="w-full resize-none rounded-md bg-black/25 py-3 pl-3.5 pr-14 text-[15px] text-ink shadow-[inset_0_0_0_1px_var(--edge-strong)] placeholder:text-ink-faint focus:outline-none focus-visible:shadow-[inset_0_0_0_2px_var(--color-system)]"
+                className="w-full resize-none rounded-md bg-black/25 py-3 pr-14 pl-3.5 text-[15px] text-ink shadow-[inset_0_0_0_1px_var(--edge-strong)] placeholder:text-ink-faint focus:outline-none focus-visible:shadow-[inset_0_0_0_2px_var(--color-system)]"
               />
               <button
                 type="submit"
                 aria-label="Send"
                 disabled={!draft.trim() || thinking}
-                className="absolute bottom-3 right-2.5 grid size-9 place-items-center rounded-md bg-system text-void transition-opacity disabled:opacity-30"
+                className="absolute right-2.5 bottom-3 grid size-9 place-items-center rounded-md bg-system text-void transition-opacity disabled:opacity-30"
               >
                 <ArrowUp aria-hidden className="size-4" strokeWidth={2.5} />
               </button>
@@ -370,20 +401,34 @@ function ToolTrace({ tools }: { tools: NonNullable<Extract<Turn, { role: "assist
   );
 }
 
-function ProposalCard({ proposal, decision, onDecide }: { proposal: Proposal; decision?: Decision; onDecide: (d: Decision) => void }) {
+function ProposalCard({
+  proposal,
+  decision,
+  onDecide,
+}: {
+  proposal: Proposal;
+  decision?: Decision;
+  onDecide: (d: Decision) => void;
+}) {
   const tone = proposal.external ? "var(--color-danger)" : "var(--color-personal)";
   return (
     <div
       role="group"
       aria-label={`Proposed action: ${proposal.title}`}
       style={{ "--p": tone } as React.CSSProperties}
-      className="chamfer-sm relative overflow-hidden rounded-md bg-[color-mix(in_oklab,var(--p)_8%,rgb(10_15_32/0.8))] shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--p)_40%,transparent)]"
+      className="relative overflow-hidden rounded-md bg-[color-mix(in_oklab,var(--p)_8%,rgb(10_15_32/0.8))] shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--p)_40%,transparent)] chamfer-sm"
     >
       <div className="flex flex-wrap items-center gap-x-2 gap-y-1 border-b border-[color-mix(in_oklab,var(--p)_25%,transparent)] px-4 py-2.5">
-        {proposal.external ? <ShieldAlert aria-hidden className="size-4 text-(--p)" /> : <Lock aria-hidden className="size-4 text-(--p)" />}
+        {proposal.external ? (
+          <ShieldAlert aria-hidden className="size-4 text-(--p)" />
+        ) : (
+          <Lock aria-hidden className="size-4 text-(--p)" />
+        )}
         <span className="text-sm font-semibold text-ink">{proposal.title}</span>
         <span className="font-mono text-[11px] text-ink-faint">{proposal.tool}</span>
-        <span className="text-meta ml-auto text-(--p)">{proposal.external ? "External · needs approval" : "Write · needs approval"}</span>
+        <span className="ml-auto text-meta text-(--p)">
+          {proposal.external ? "External · needs approval" : "Write · needs approval"}
+        </span>
       </div>
       <dl className="grid grid-cols-[80px_1fr] gap-x-3 gap-y-1.5 px-4 py-3 text-sm">
         {proposal.fields.map(([k, v]) => (
@@ -428,7 +473,15 @@ function ProposalCard({ proposal, decision, onDecide }: { proposal: Proposal; de
   );
 }
 
-function ContextPanel({ citations, highlight, audit }: { citations: Citation[]; highlight: string | null; audit: AuditEntry[] }) {
+function ContextPanel({
+  citations,
+  highlight,
+  audit,
+}: {
+  citations: Citation[];
+  highlight: string | null;
+  audit: AuditEntry[];
+}) {
   return (
     <aside aria-label="Context and permissions" className="flex flex-col gap-5">
       <section>
@@ -468,7 +521,10 @@ function ContextPanel({ citations, highlight, audit }: { citations: Citation[]; 
                     read · auto
                   </Chip>
                 ) : (
-                  <Chip tone={t.external ? "var(--color-danger)" : "var(--color-personal)"} className="py-0.5 text-[10px]">
+                  <Chip
+                    tone={t.external ? "var(--color-danger)" : "var(--color-personal)"}
+                    className="py-0.5 text-[10px]"
+                  >
                     {t.external ? "external · approve" : "write · approve"}
                   </Chip>
                 )}
@@ -482,8 +538,8 @@ function ContextPanel({ citations, highlight, audit }: { citations: Citation[]; 
         <p className="mb-1.5 flex items-center gap-1.5 font-semibold text-ink-muted">
           <Lock aria-hidden className="size-3.5" /> Data boundaries
         </p>
-        Health and finance records are not shared with the assistant. Email and web content are treated as untrusted and cannot
-        override these rules.
+        Health and finance records are not shared with the assistant. Email and web content are treated as untrusted and
+        cannot override these rules.
       </section>
 
       <section>
@@ -495,7 +551,7 @@ function ContextPanel({ citations, highlight, audit }: { citations: Citation[]; 
         ) : (
           <ol className="flex flex-col gap-1 font-mono text-[11px]">
             {audit.map((a, i) => (
-              <li key={i} className="animate-rise flex gap-2 text-ink-muted">
+              <li key={i} className="flex animate-rise gap-2 text-ink-muted">
                 <span className="text-ink-ghost">{a.at}</span>
                 {a.text}
               </li>

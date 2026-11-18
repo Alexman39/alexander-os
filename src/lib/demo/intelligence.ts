@@ -54,14 +54,30 @@ export const DEMO_EVENTS: IntelEvent[] = [
     title: "Open-weight model family adds long-context variants; independent benchmarks pending",
     summary:
       "A fictional lab released three open-weight checkpoints with extended context windows. Claimed retrieval accuracy has not yet been replicated by third parties.",
-    whyItMatters: "Long-context open models could make local retrieval over personal notes viable without a hosted API.",
+    whyItMatters:
+      "Long-context open models could make local retrieval over personal notes viable without a hosted API.",
     personalRelevance: "Directly related to your thesis on retrieval evaluation (P-1).",
     possibleAction: "Add to thesis reading list; revisit once replication results appear.",
     factors: { interest: 98, impact: 86, usefulness: 92, evidence: 70, freshness: 95 },
     sources: [
-      { name: "Demo Lab Blog", url: "https://example.com/demo-lab/release-notes", published: "2026-11-09T07:12:00Z", kind: "official" },
-      { name: "Example ML Weekly", url: "https://example.org/ml-weekly/long-context", published: "2026-11-09T09:40:00Z", kind: "analysis" },
-      { name: "Sample Research Feed", url: "https://example.org/research-feed/41823", published: "2026-11-09T10:05:00Z", kind: "feed" },
+      {
+        name: "Demo Lab Blog",
+        url: "https://example.com/demo-lab/release-notes",
+        published: "2026-11-09T07:12:00Z",
+        kind: "official",
+      },
+      {
+        name: "Example ML Weekly",
+        url: "https://example.org/ml-weekly/long-context",
+        published: "2026-11-09T09:40:00Z",
+        kind: "analysis",
+      },
+      {
+        name: "Sample Research Feed",
+        url: "https://example.org/research-feed/41823",
+        published: "2026-11-09T10:05:00Z",
+        kind: "feed",
+      },
       { name: "Demo Wire", url: "https://example.com/wire/ai-models", published: "2026-11-09T11:30:00Z", kind: "feed" },
     ],
     firstSeen: "2026-11-09T07:20:00Z",
@@ -77,9 +93,24 @@ export const DEMO_EVENTS: IntelEvent[] = [
     possibleAction: "Compare the draft's audit fields with the AssistantToolCall entity.",
     factors: { interest: 92, impact: 80, usefulness: 95, evidence: 82, freshness: 88 },
     sources: [
-      { name: "Example Standards Group", url: "https://example.org/standards/agent-permissions-draft", published: "2026-11-08T16:00:00Z", kind: "official" },
-      { name: "Demo Dev Digest", url: "https://example.com/dev-digest/agents", published: "2026-11-09T06:30:00Z", kind: "analysis" },
-      { name: "Demo Wire", url: "https://example.com/wire/agent-spec", published: "2026-11-09T08:15:00Z", kind: "feed" },
+      {
+        name: "Example Standards Group",
+        url: "https://example.org/standards/agent-permissions-draft",
+        published: "2026-11-08T16:00:00Z",
+        kind: "official",
+      },
+      {
+        name: "Demo Dev Digest",
+        url: "https://example.com/dev-digest/agents",
+        published: "2026-11-09T06:30:00Z",
+        kind: "analysis",
+      },
+      {
+        name: "Demo Wire",
+        url: "https://example.com/wire/agent-spec",
+        published: "2026-11-09T08:15:00Z",
+        kind: "feed",
+      },
     ],
     firstSeen: "2026-11-08T16:20:00Z",
   },
@@ -94,8 +125,18 @@ export const DEMO_EVENTS: IntelEvent[] = [
     possibleAction: "Note for the hosting decision in ARCHITECTURE.md.",
     factors: { interest: 80, impact: 70, usefulness: 72, evidence: 74, freshness: 76 },
     sources: [
-      { name: "Sample Market Notes", url: "https://example.com/market-notes/usage-pricing", published: "2026-11-09T05:00:00Z", kind: "analysis" },
-      { name: "Demo Founder Letter", url: "https://example.org/founder-letter/pricing", published: "2026-11-08T19:00:00Z", kind: "analysis" },
+      {
+        name: "Sample Market Notes",
+        url: "https://example.com/market-notes/usage-pricing",
+        published: "2026-11-09T05:00:00Z",
+        kind: "analysis",
+      },
+      {
+        name: "Demo Founder Letter",
+        url: "https://example.org/founder-letter/pricing",
+        published: "2026-11-08T19:00:00Z",
+        kind: "analysis",
+      },
     ],
     firstSeen: "2026-11-09T05:10:00Z",
   },
@@ -110,8 +151,18 @@ export const DEMO_EVENTS: IntelEvent[] = [
     possibleAction: "Add an injection fixture to the integration test plan.",
     factors: { interest: 78, impact: 88, usefulness: 90, evidence: 85, freshness: 70 },
     sources: [
-      { name: "Example Security Advisories", url: "https://example.org/advisories/2026-114", published: "2026-11-07T12:00:00Z", kind: "official" },
-      { name: "Demo Sec Weekly", url: "https://example.com/sec-weekly/calendar-injection", published: "2026-11-08T09:00:00Z", kind: "analysis" },
+      {
+        name: "Example Security Advisories",
+        url: "https://example.org/advisories/2026-114",
+        published: "2026-11-07T12:00:00Z",
+        kind: "official",
+      },
+      {
+        name: "Demo Sec Weekly",
+        url: "https://example.com/sec-weekly/calendar-injection",
+        published: "2026-11-08T09:00:00Z",
+        kind: "analysis",
+      },
     ],
     firstSeen: "2026-11-07T12:30:00Z",
   },
@@ -125,7 +176,12 @@ export const DEMO_EVENTS: IntelEvent[] = [
     possibleAction: "Skim migration guide before scaffolding Stage 1.",
     factors: { interest: 76, impact: 66, usefulness: 70, evidence: 90, freshness: 60 },
     sources: [
-      { name: "Demo Framework Blog", url: "https://example.com/framework/blog/minor-release", published: "2026-11-06T15:00:00Z", kind: "official" },
+      {
+        name: "Demo Framework Blog",
+        url: "https://example.com/framework/blog/minor-release",
+        published: "2026-11-06T15:00:00Z",
+        kind: "official",
+      },
     ],
     firstSeen: "2026-11-06T15:20:00Z",
   },
@@ -139,7 +195,12 @@ export const DEMO_EVENTS: IntelEvent[] = [
     possibleAction: "None required.",
     factors: { interest: 70, impact: 52, usefulness: 60, evidence: 80, freshness: 55 },
     sources: [
-      { name: "Example Journal Digest", url: "https://example.org/journal-digest/protein-timing", published: "2026-11-05T10:00:00Z", kind: "analysis" },
+      {
+        name: "Example Journal Digest",
+        url: "https://example.org/journal-digest/protein-timing",
+        published: "2026-11-05T10:00:00Z",
+        kind: "analysis",
+      },
     ],
     firstSeen: "2026-11-05T10:30:00Z",
   },
@@ -153,8 +214,18 @@ export const DEMO_EVENTS: IntelEvent[] = [
     possibleAction: "Review list during weekly recap.",
     factors: { interest: 72, impact: 40, usefulness: 55, evidence: 76, freshness: 62 },
     sources: [
-      { name: "Demo Games Feed", url: "https://example.com/games-feed/showcase-nov", published: "2026-11-04T18:00:00Z", kind: "feed" },
-      { name: "Sample Press Room", url: "https://example.org/press/showcase", published: "2026-11-04T17:00:00Z", kind: "official" },
+      {
+        name: "Demo Games Feed",
+        url: "https://example.com/games-feed/showcase-nov",
+        published: "2026-11-04T18:00:00Z",
+        kind: "feed",
+      },
+      {
+        name: "Sample Press Room",
+        url: "https://example.org/press/showcase",
+        published: "2026-11-04T17:00:00Z",
+        kind: "official",
+      },
     ],
     firstSeen: "2026-11-04T18:10:00Z",
   },

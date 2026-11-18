@@ -1,0 +1,8 @@
+.next
+node_modules
+app-tmp
+test-results
+playwright-report
+package-lock.json
+.vercel
+*.md

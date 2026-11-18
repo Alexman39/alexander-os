@@ -11,7 +11,16 @@ export function Monogram({ size = 28 }: { size?: number }) {
         </linearGradient>
       </defs>
       <path d="M16 3 L29 28 H22.5 L16 15 L9.5 28 H3 Z" fill="url(#mono-g)" />
-      <ellipse cx="16" cy="20" rx="14.5" ry="3.2" fill="none" stroke="#52c7ff" strokeWidth="1.4" transform="rotate(-12 16 20)" />
+      <ellipse
+        cx="16"
+        cy="20"
+        rx="14.5"
+        ry="3.2"
+        fill="none"
+        stroke="#52c7ff"
+        strokeWidth="1.4"
+        transform="rotate(-12 16 20)"
+      />
     </svg>
   );
 }

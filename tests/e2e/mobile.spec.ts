@@ -24,7 +24,9 @@ test.describe("mobile layout", () => {
   test("assistant context moves into a sheet", async ({ page }) => {
     await page.goto("/assistant");
     await page.getByRole("button", { name: /Context \(4\)/ }).click();
-    await expect(page.getByRole("dialog", { name: "Context & permissions" }).getByText("Records in use · 4")).toBeVisible();
+    await expect(
+      page.getByRole("dialog", { name: "Context & permissions" }).getByText("Records in use · 4"),
+    ).toBeVisible();
   });
 
   test("assistant does not scroll the page on load", async ({ page }) => {

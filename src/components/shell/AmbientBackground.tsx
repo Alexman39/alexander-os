@@ -10,13 +10,13 @@ export function AmbientBackground() {
       {/* deep vertical gradient */}
       <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_0%,#0d1733_0%,#070b18_55%,#04060e_100%)]" />
 
-      <div className="aurora-blob aurora-blob--a left-[-10vw] top-[-20vh] h-[70vh] w-[60vw]" />
-      <div className="aurora-blob aurora-blob--b right-[-15vw] top-[10vh] h-[60vh] w-[55vw]" />
+      <div className="aurora-blob aurora-blob--a top-[-20vh] left-[-10vw] h-[70vh] w-[60vw]" />
+      <div className="aurora-blob aurora-blob--b top-[10vh] right-[-15vw] h-[60vh] w-[55vw]" />
       <div className="aurora-blob aurora-blob--c bottom-[-30vh] left-[20vw] h-[60vh] w-[60vw]" />
 
       {/* ribbon of light — thin parallel curves */}
       <svg
-        className="absolute left-[-10%] top-[46%] h-[42vh] w-[120%] opacity-50 mix-blend-screen"
+        className="absolute top-[46%] left-[-10%] h-[42vh] w-[120%] opacity-50 mix-blend-screen"
         viewBox="0 0 1200 300"
         preserveAspectRatio="none"
       >
@@ -32,7 +32,12 @@ export function AmbientBackground() {
           <path className="ribbon-path" strokeWidth="1.2" d="M0 170 C 200 90, 380 250, 600 160 S 1000 70, 1200 150" />
           <path className="ribbon-path" strokeWidth="0.8" d="M0 185 C 220 110, 400 260, 610 175 S 990 95, 1200 168" />
           <path className="ribbon-path" strokeWidth="0.6" d="M0 150 C 180 70, 420 230, 590 140 S 1010 60, 1200 130" />
-          <path className="ribbon-path" strokeWidth="2.2" strokeOpacity="0.35" d="M0 200 C 240 140, 380 270, 620 190 S 980 120, 1200 186" />
+          <path
+            className="ribbon-path"
+            strokeWidth="2.2"
+            strokeOpacity="0.35"
+            d="M0 200 C 240 140, 380 270, 620 190 S 980 120, 1200 186"
+          />
         </g>
       </svg>
 

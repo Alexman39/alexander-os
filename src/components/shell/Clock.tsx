@@ -6,7 +6,12 @@ export const TZ = "Europe/Athens";
 
 function format(d: Date) {
   const time = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: TZ }).format(d);
-  const date = new Intl.DateTimeFormat("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: TZ }).format(d);
+  const date = new Intl.DateTimeFormat("en-GB", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    timeZone: TZ,
+  }).format(d);
   return { time, date };
 }
 
@@ -16,8 +21,10 @@ export function Clock({ className }: { className?: string }) {
   const f = now !== null ? format(new Date(now)) : null;
   return (
     <div className={className} aria-label={f ? `${f.date}, ${f.time} Athens time` : undefined}>
-      <span className="text-display block text-right text-lg font-medium leading-none tabular-nums text-ink">{f?.time ?? "--:--"}</span>
-      <span className="text-meta block text-right text-ink-faint">{f?.date ?? " "}</span>
+      <span className="block text-right text-display text-lg leading-none font-medium text-ink tabular-nums">
+        {f?.time ?? "--:--"}
+      </span>
+      <span className="block text-right text-meta text-ink-faint">{f?.date ?? " "}</span>
     </div>
   );
 }
