@@ -47,3 +47,6 @@ next-env.d.ts
 
 # leftover scaffold folder (safe to delete)
 /app-tmp/
+
+# prisma generated client
+/src/generated/
